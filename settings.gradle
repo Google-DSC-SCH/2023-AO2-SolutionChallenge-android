@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 rootProject.name = "Run-Eat"
 include ':app'
 include ':data'
+include ':domain'
