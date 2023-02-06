@@ -1,4 +1,4 @@
-package com.AO2.run_eat
+package com.ao2.run_eat
 
 import org.junit.Test
 

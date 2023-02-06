@@ -1,4 +1,4 @@
-package com.AO2.run_eat.base
+package com.ao2.run_eat.base
 
 import android.view.View
 import android.widget.TextView

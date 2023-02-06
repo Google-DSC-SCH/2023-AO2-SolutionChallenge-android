@@ -1,10 +1,10 @@
-package com.AO2.run_eat.base
+package com.ao2.run_eat.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 //import com.depromeet.data.model.error.InvalidAccessTokenException
 //import com.depromeet.data.model.error.InvalidAccessTokenExpire
-//import com.depromeet.knockknock.di.PresentationApplication.Companion.editor
+//import com.ao2.run_eat.di.PresentationApplication.Companion.editor
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableSharedFlow

@@ -1,11 +1,10 @@
-package com.example.check_truck_operation_android.base
+package com.ao2.run_eat.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.AO2.run_eat.base.BaseViewModel
-import com.AO2.run_eat.util.LoadingDialog
+import com.ao2.run_eat.util.LoadingDialog
 
 abstract class BaseActivity<T : ViewDataBinding, R : BaseViewModel> : AppCompatActivity() {
 

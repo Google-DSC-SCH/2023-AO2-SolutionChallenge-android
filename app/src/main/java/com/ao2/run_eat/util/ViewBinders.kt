@@ -1,4 +1,4 @@
-package com.AO2.run_eat.util
+package com.ao2.run_eat.util
 
 import android.view.View
 import androidx.databinding.BindingAdapter

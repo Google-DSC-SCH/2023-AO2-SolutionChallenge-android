@@ -1,11 +1,11 @@
-package com.AO2.run_eat.util
+package com.ao2.run_eat.util
 
 import android.app.Dialog
 import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Window
-import com.AO2.run_eat.R
+import com.ao2.run_eat.R
 
 class LoadingDialog constructor(context: Context) : Dialog(context){
     override fun onCreate(savedInstanceState: Bundle?) {

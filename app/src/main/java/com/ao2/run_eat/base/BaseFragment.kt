@@ -1,4 +1,4 @@
-package com.AO2.run_eat.base
+package com.ao2.run_eat.base
 
 import android.os.Bundle
 import android.util.Log
@@ -14,7 +14,7 @@ import androidx.navigation.NavDirections
 import androidx.navigation.fragment.DialogFragmentNavigator
 import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.findNavController
-import com.AO2.run_eat.util.LoadingDialog
+import com.ao2.run_eat.util.LoadingDialog
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 
