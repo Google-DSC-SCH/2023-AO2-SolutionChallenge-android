@@ -1,0 +1,69 @@
+package com.AO2.run_eat.base
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+//import com.depromeet.data.model.error.InvalidAccessTokenException
+//import com.depromeet.data.model.error.InvalidAccessTokenExpire
+//import com.depromeet.knockknock.di.PresentationApplication.Companion.editor
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.plus
+
+abstract class BaseViewModel : ViewModel() {
+
+    private val _errorEvent: MutableSharedFlow<Throwable> = MutableSharedFlow()
+    val errorEvent: SharedFlow<Throwable> = _errorEvent.asSharedFlow()
+
+    private val _loadingEvent: MutableSharedFlow<Boolean> = MutableSharedFlow()
+    val loadingEvent: SharedFlow<Boolean> = _loadingEvent.asSharedFlow()
+
+    private val errorHandler = CoroutineExceptionHandler { CoroutineContext, throwable ->
+        viewModelScope.launch(CoroutineContext) {
+            _errorEvent.emit(throwable)
+        }
+    }
+
+    private val _needLoginEvent: MutableSharedFlow<Boolean> = MutableSharedFlow<Boolean>()
+    val needLoginEvent: SharedFlow<Boolean> = _needLoginEvent
+
+    fun catchError(e: Throwable?) {
+//        viewModelScope.launch(errorHandler) {
+//            e?.let {
+//                when(it) {
+//                    is InvalidAccessTokenException -> {
+//                        editor.remove("access_token")
+//                        editor.remove("refresh_token")
+//                        editor.commit()
+//                        _needLoginEvent.emit(true)
+//                    }
+//                    is InvalidAccessTokenExpire -> {
+//                        editor.remove("access_token")
+//                        editor.remove("refresh_token")
+//                        editor.commit()
+//                        _needLoginEvent.emit(true)
+//                    }
+//                    else -> _errorEvent.emit(it)
+//                }
+//            }
+//            dismissLoading()
+//        }
+    }
+
+    fun showLoading() {
+        baseViewModelScope.launch {
+            _loadingEvent.emit(false)
+        }
+    }
+
+    fun dismissLoading() {
+        baseViewModelScope.launch {
+            _loadingEvent.emit(true)
+        }
+    }
+
+    protected val baseViewModelScope: CoroutineScope = viewModelScope + errorHandler
+}

@@ -3,19 +3,19 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android'
     id 'kotlin-kapt'
-//    id 'dagger.hilt.android.plugin'
+    id 'dagger.hilt.android.plugin'
     id 'androidx.navigation.safeargs'
     id 'kotlin-parcelize'
 }
 
 android {
     namespace 'com.AO2.run_eat'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.AO2.run_eat"
         minSdk 28
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
