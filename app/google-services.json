@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "213617031580",
+    "project_id": "run-eat-ad841",
+    "storage_bucket": "run-eat-ad841.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:213617031580:android:ae23e4fea28363e6193059",
+        "android_client_info": {
+          "package_name": "com.ao2.run_eat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "213617031580-j58939j9h6uv72cpofsjecn98135lplt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ao2.run_eat",
+            "certificate_hash": "be08731fd08077064e72910e716ef9a80fbbabc5"
+          }
+        },
+        {
+          "client_id": "213617031580-orml9vnuo1qudau0t600kj96n5iugjks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTuL4pCNMKHsi8NuTkrL_NuMDsZuVia3k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "213617031580-orml9vnuo1qudau0t600kj96n5iugjks.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
