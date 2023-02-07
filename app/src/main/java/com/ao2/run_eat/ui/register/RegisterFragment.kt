@@ -84,7 +84,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
         try {
             val idToken = completedTask.getResult(ApiException::class.java).idToken
             idToken?.let { token ->
-//                viewModel.oauthLogin(idToken = token, provider = "GOOGLE")
+                viewModel.oauthLogin(idToken = token)
             }
         } catch (e: ApiException){
             toastMessage("구글 로그인에 실패 하였습니다.")
