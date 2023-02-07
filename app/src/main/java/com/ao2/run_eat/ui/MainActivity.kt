@@ -25,8 +25,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     override fun initStartView() {
         initNavController()
-        /** FCM설정, Token값 가져오기 */
-//        MyFirebaseMessagingService().getFirebaseToken()
 
         /** DynamicLink 수신확인 */
         initDynamicLink()

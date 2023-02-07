@@ -1,5 +1,6 @@
 package com.ao2.run_eat.ui.register
 
+import android.util.Log
 import com.ao2.run_eat.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -17,6 +18,20 @@ class RegisterViewModel @Inject constructor(
 
     private val _navigationHandler: MutableSharedFlow<RegisterNavigationAction> = MutableSharedFlow<RegisterNavigationAction>()
     val navigationHandler: SharedFlow<RegisterNavigationAction> = _navigationHandler.asSharedFlow()
+    val notificationAgreed: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
+    val firebaseToken: MutableStateFlow<String> = MutableStateFlow("")
+
+    init {
+    }
+
+    fun sendNotification() {
+        baseViewModelScope.launch {
+            showLoading()
+            notificationAgreed.value = true
+//            mainRepository.postNotificationExperience(token = firebaseToken.value, content = messageText.value)
+            dismissLoading()
+        }
+    }
 
     fun oauthLogin(idToken: String) {
         baseViewModelScope.launch {
@@ -46,6 +61,22 @@ class RegisterViewModel @Inject constructor(
 //                    }
 //                }
             dismissLoading()
+        }
+    }
+
+    override fun onSendTestPushAlarmClicked() {
+        baseViewModelScope.launch {
+            Log.d("ttt", "1")
+
+            if (!notificationAgreed.value) {
+                Log.d("ttt", "3")
+
+                _navigationHandler.emit(RegisterNavigationAction.NavigateToPushSetting)
+            } else {
+                Log.d("ttt", "4")
+
+                _navigationHandler.emit(RegisterNavigationAction.NavigateToNotificationAlarm)
+            }
         }
     }
 
