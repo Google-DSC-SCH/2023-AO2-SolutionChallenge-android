@@ -1,14 +1,10 @@
 package com.ao2.run_eat.ui.home
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.ao2.run_eat.R
 import com.ao2.run_eat.base.BaseFragment
 import com.ao2.run_eat.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 
 
 @AndroidEntryPoint
