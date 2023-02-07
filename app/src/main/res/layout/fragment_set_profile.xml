@@ -21,7 +21,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:fontFamily="@font/pretendard_bold"
             android:text="프로필 만들기"
             android:textColor="@color/black"
             android:textSize="30sp"
@@ -44,14 +43,13 @@
                 android:id="@+id/user_profile_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/img_user_profile_happy"
+                android:src="@drawable/ic_launcher_foreground"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                app:glide1000="@{viewmodel.profileImg.url}"/>
+                app:layout_constraintVertical_bias="0.0"/>
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -61,31 +59,6 @@
                 android:src="@drawable/img_user_profile_set_button"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!--        <FrameLayout-->
-        <!--            android:id="@+id/proflie_frame"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            app:layout_constraintBottom_toTopOf="@id/nickname_frame"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/make_profile_text">-->
-
-        <!--            <de.hdodenhof.circleimageview.CircleImageView-->
-        <!--                android:id="@+id/profile_image"-->
-        <!--                android:layout_width="80dp"-->
-        <!--                android:layout_height="80dp"-->
-        <!--                android:src="@drawable/img_user_profile_happy" />-->
-
-        <!--            <de.hdodenhof.circleimageview.CircleImageView-->
-        <!--                android:id="@+id/add_profile_button"-->
-        <!--                android:layout_width="24dp"-->
-        <!--                android:layout_height="24dp"-->
-        <!--                android:layout_gravity="right|bottom"-->
-        <!--                android:onClick="@{() -> vm.onProfileImageSetClicked()}"-->
-        <!--                android:src="@drawable/setprofile_add_button" />-->
-
-
-        <!--        </FrameLayout>-->
 
         <LinearLayout
             android:id="@+id/nickname_frame"
@@ -104,7 +77,6 @@
                 android:id="@+id/user_name_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/pretendard_bold"
                 android:text="@string/setprofile_nickname"
                 android:layout_marginBottom="3dp"/>
 
@@ -343,7 +315,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:fontFamily="@font/pretendard_medium"
                 android:textSize="18dp"
                 android:text="선택 완료!"
                 android:textColor="@color/black"

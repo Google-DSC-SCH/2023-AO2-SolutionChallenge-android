@@ -1,6 +1,7 @@
 package com.ao2.run_eat.ui.register
 
 import android.annotation.SuppressLint
+import android.app.Activity.RESULT_OK
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -20,6 +21,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.ao2.run_eat.BuildConfig
 import com.ao2.run_eat.R
 import com.ao2.run_eat.base.BaseFragment
 import com.ao2.run_eat.databinding.FragmentRegisterBinding
@@ -44,9 +46,10 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
     private val navController by lazy { findNavController() }
 
     private var googleLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == 1) {
+        if (result.resultCode == RESULT_OK) {
             val data: Intent? = result.data
             val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
+            Log.d("ttt", "ㅇㅁㄴㅇ")
             handleSignInResult(task)
         }
     }
@@ -78,6 +81,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
                         } }
                     is RegisterNavigationAction.NavigateToNotificationAlarm -> createNotification()
                     is RegisterNavigationAction.NavigateToGoogleLogin -> googleLogin()
+                    is RegisterNavigationAction.NavigateToLoginFirst -> navigate(RegisterFragmentDirections.actionRegisterFragmentToSetProfileFragment())
                     else -> {}
                 }
             }
@@ -110,21 +114,29 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
 
     private fun googleLogin() {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(BuildConfig.GOOGLE_LOGIN_CLIENT_ID)
             .requestEmail()
             .build()
+
 
         val mGoogleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
         val account = GoogleSignIn.getLastSignedInAccount(requireContext())
 
         val signInIntent = mGoogleSignInClient.signInIntent
+
         googleLauncher.launch(signInIntent)
     }
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
+            Log.d("ttt", completedTask.toString())
+            Log.d("ttt", completedTask.result.email.toString())
+            Log.d("ttt", completedTask.result.idToken.toString())
+
             val idToken = completedTask.getResult(ApiException::class.java).idToken
             idToken?.let { token ->
-                viewModel.oauthLogin(idToken = token)
+                Log.d("ttt", token.toString())
+//                viewModel.oauthLogin(idToken = token)
             }
         } catch (e: ApiException){
             toastMessage("구글 로그인에 실패 하였습니다.")

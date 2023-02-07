@@ -9,6 +9,10 @@ plugins {
     id 'com.google.gms.google-services'
 }
 
+// local.properties 사용을 위함
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 android {
     namespace 'com.ao2.run_eat'
     compileSdk 33
@@ -21,6 +25,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // url 변수 지정
+        buildConfigField "String", "GOOGLE_LOGIN_CLIENT_ID", properties['google.login.clientId']
     }
 
     buildTypes {

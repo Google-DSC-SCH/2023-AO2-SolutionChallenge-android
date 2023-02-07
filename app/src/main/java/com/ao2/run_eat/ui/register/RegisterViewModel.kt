@@ -45,7 +45,7 @@ class RegisterViewModel @Inject constructor(
 //
 //                    if(!it.is_registered) {
 //                        editor.commit()
-//                        _navigationHandler.emit(RegisterNavigationAction.NavigateToLoginFrist)
+                        _navigationHandler.emit(RegisterNavigationAction.NavigateToLoginFirst)
 //                    } else {
 //                        mainRepository.postLogin(idToken = idToken, provider = provider)
 //                            .onSuccess { response ->
