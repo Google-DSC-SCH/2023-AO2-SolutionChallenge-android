@@ -5,6 +5,7 @@ import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.widget.TextView
+import androidx.databinding.BindingAdapter
 
 fun textChangeColor(
     text: TextView,
@@ -22,4 +23,14 @@ fun textChangeColor(
     )
 
     return builder
+}
+
+@BindingAdapter("nicknameEditTextCount")
+fun TextView.bindNicknameEditTextCount(textLength: Int) {
+    this.text = "$textLength/15"
+}
+
+@BindingAdapter("ageEditTextCount")
+fun TextView.bindAgeEditTextCount(textLength: Int) {
+    this.text = "$textLength/8"
 }

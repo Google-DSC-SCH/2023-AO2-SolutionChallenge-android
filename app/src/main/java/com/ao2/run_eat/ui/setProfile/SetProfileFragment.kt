@@ -1,12 +1,14 @@
 package com.ao2.run_eat.ui.setProfile
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.ao2.run_eat.R
 import com.ao2.run_eat.base.BaseFragment
 import com.ao2.run_eat.databinding.FragmentSetProfileBinding
+import com.ao2.run_eat.ui.setProfile.bottom.BottomAgeNumberPicker
 import com.ao2.run_eat.util.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -30,7 +32,7 @@ class SetProfileFragment : BaseFragment<FragmentSetProfileBinding, SetProfileVie
         }
         exception = viewModel.errorEvent
         initEditText()
-        countEditTextMessage()
+//        countEditTextMessage()
     }
 
     override fun initDataBinding() {
@@ -40,6 +42,7 @@ class SetProfileFragment : BaseFragment<FragmentSetProfileBinding, SetProfileVie
 //                    is SetProfileNavigationAction.NavigateToSetProfileImage -> { setProfileImageBottomSheet(profile = it.profile) }
 //                    is SetProfileNavigationAction.NavigateToHome -> navigate(SetProfileFragmentDirections.actionSetProfileFragmentToHomeFragment())
                     is SetProfileNavigationAction.NavigateToEmpty -> toastMessage("닉네임이 비어 있습니다!")
+                    is SetProfileNavigationAction.NavigateToAgeNumberPicker -> ageNumberPicker()
                     else -> {}
                 }
             }
@@ -71,22 +74,29 @@ class SetProfileFragment : BaseFragment<FragmentSetProfileBinding, SetProfileVie
         }
     }
 
-
-    private fun countEditTextMessage() {
-        lifecycleScope.launchWhenStarted {
-            viewModel.editTextMessageCountEvent.collectLatest {
-                binding.editTextCount.text = "$it/15"
-
-                if (it != 0) {
-                    binding.editTextCount.text =
-                        textChangeColor(
-                            binding.editTextCount,
-                            "#000000",
-                            0,
-                            it.toString().length
-                        )
-                }
-            }
-        }
+    private fun ageNumberPicker() {
+        Log.d("ttt", "ageNumberPicker 실행")
+        val bottomSheet = BottomAgeNumberPicker(callback = {
+            toastMessage(it.toString())
+        })
+        bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }
+
+//    private fun countEditTextMessage() {
+//        lifecycleScope.launchWhenStarted {
+//            viewModel.editTextMessageCountEvent.collectLatest {
+//                binding.editTextCount.text = "$it/15"
+//
+//                if (it != 0) {
+//                    binding.editTextCount.text =
+//                        textChangeColor(
+//                            binding.editTextCount,
+//                            "#000000",
+//                            0,
+//                            it.toString().length
+//                        )
+//                }
+//            }
+//        }
+//    }
 }

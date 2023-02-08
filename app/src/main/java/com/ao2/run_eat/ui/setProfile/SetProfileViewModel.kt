@@ -18,8 +18,11 @@ class SetProfileViewModel @Inject constructor(
     private val _navigationHandler: MutableSharedFlow<SetProfileNavigationAction> = MutableSharedFlow<SetProfileNavigationAction>()
     val navigationHandler: SharedFlow<SetProfileNavigationAction> = _navigationHandler.asSharedFlow()
 
-    var inputContent = MutableStateFlow<String>("")
-    var editTextMessageCountEvent = MutableStateFlow<Int>(0)
+    var nicknameInputContent = MutableStateFlow<String>("")
+    var nicknameEditTextCountEvent = MutableStateFlow<Int>(0)
+
+    var ageInputContent = MutableStateFlow<String>("")
+    var ageEditTextCountEvent = MutableStateFlow<Int>(0)
 
     val setBtnState: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
     val setPossibleState: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
@@ -36,17 +39,36 @@ class SetProfileViewModel @Inject constructor(
             dismissLoading()
         }
 
-        viewModelScope.launch {
-            inputContent.debounce(0).collectLatest {
+        baseViewModelScope.launch {
+            nicknameInputContent.debounce(0).collectLatest {
                 onEditTextCount(it.length)
+            }
+        }
+
+        baseViewModelScope.launch {
+            ageInputContent.debounce(0).collectLatest {
+                onAgeEditTextCount(it.length)
             }
         }
     }
 
     private fun onEditTextCount(count: Int) {
         viewModelScope.launch {
-            editTextMessageCountEvent.value = count
+            nicknameEditTextCountEvent.value = count
         }
+    }
+
+    private fun onAgeEditTextCount(count: Int) {
+        viewModelScope.launch {
+            ageEditTextCountEvent.value = count
+        }
+    }
+
+    override fun onAgeSetClicked(){
+        baseViewModelScope.launch {
+            _navigationHandler.emit(SetProfileNavigationAction.NavigateToAgeNumberPicker)
+        }
+
     }
 
 
@@ -88,9 +110,5 @@ class SetProfileViewModel @Inject constructor(
             dismissLoading()
         }
     }
-
-
-
-
 
 }

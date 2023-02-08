@@ -113,12 +113,11 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <TextView
-            android:id="@+id/some_id"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:lineSpacingExtra="4sp"
-            android:text="이 시간에 보내기"
+            android:text="@string/ok_text"
             android:textColor="@color/black"
             android:textSize="18dp"
             android:translationY="-1.86sp" />

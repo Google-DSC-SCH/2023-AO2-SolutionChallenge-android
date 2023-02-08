@@ -80,39 +80,6 @@
                 android:text="@string/setprofile_nickname"
                 android:layout_marginBottom="3dp"/>
 
-            <!--            <com.google.android.material.textfield.TextInputLayout-->
-            <!--                android:id="@+id/example_content"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:textColorHint="@color/gray05"-->
-            <!--                app:boxBackgroundColor="@color/gray03"-->
-            <!--                app:boxBackgroundMode="filled"-->
-            <!--                app:boxCornerRadiusBottomEnd="10dp"-->
-            <!--                app:boxCornerRadiusBottomStart="10dp"-->
-            <!--                app:boxCornerRadiusTopEnd="10dp"-->
-            <!--                app:boxCornerRadiusTopStart="10dp"-->
-            <!--                app:boxStrokeWidth="0dp"-->
-            <!--                app:boxStrokeWidthFocused="0dp"-->
-            <!--                app:counterEnabled="true"-->
-            <!--                app:counterMaxLength="15"-->
-            <!--                app:endIconMode="clear_text"-->
-            <!--                app:layout_constraintBottom_toTopOf="@+id/test_alarm_button"-->
-            <!--                app:hintEnabled="false">-->
-
-            <!--                <com.google.android.material.textfield.TextInputEditText-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="50dp"-->
-            <!--                    android:layout_marginStart="16dp"-->
-            <!--                    android:layout_marginEnd="16dp"-->
-            <!--                    android:fontFamily="@font/pretendard_medium"-->
-            <!--                    android:hint="@string/setprofile_nickname_hint"-->
-            <!--                    android:paddingTop="10dp"-->
-            <!--                    android:privateImeOptions="defaultInputMode=korean"-->
-            <!--                    android:textColor="@color/black"-->
-            <!--                    android:textSize="16sp" />-->
-            <!--                -->
-            <!--            </com.google.android.material.textfield.TextInputLayout>-->
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -130,7 +97,7 @@
                     android:layout_marginStart="0dp"
                     android:background="@color/transparent"
                     android:hint="@string/setprofile_nickname_hint"
-                    android:text="@={viewmodel.inputContent}"
+                    android:text="@={viewmodel.nicknameInputContent}"
                     android:maxLength="15"
                     android:layout_weight="1"
                     app:layout_constraintStart_toStartOf="parent"
@@ -144,6 +111,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:textColor="@color/gray05"
+                    app:nicknameEditTextCount="@{viewmodel.nicknameEditTextCountEvent}"
                     android:text="0/15">
 
                 </TextView>
@@ -151,151 +119,163 @@
 
             </LinearLayout>
 
+        </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/age_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nickname_frame">
+
+            <TextView
+                android:id="@+id/age_title"
+                style="@style/Theme.AppCompat.TextView.Profile.Username.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:text="@string/setprofile_age" />
+
+            <LinearLayout
+                android:background="@drawable/custom_backgroundwhite_radius16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/age_contents"
+                    style="@style/Theme.AppCompat.TextView.Profile.Username.Contents"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:background="@color/transparent"
+                    android:hint="@string/setprofile_age_hint"
+                    android:text="@={viewmodel.ageInputContent}"
+                    android:inputType="number"
+                    android:maxLength="8"
+                    android:layout_weight="1"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/age_edit_text_count"
+                    style="Theme.AppCompat.TextView.Regular.Black.Size16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/gray05"
+                    app:ageEditTextCount="@{viewmodel.ageEditTextCountEvent}"
+                    android:text="0/8">
+
+                </TextView>
+
+
+            </LinearLayout>
 
         </LinearLayout>
 
-        <!--        <LinearLayout-->
-        <!--            android:id="@+id/linearLayout"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:orientation="vertical"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/nickname_frame">-->
+        <LinearLayout
+            android:id="@+id/gender_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/age_frame">
 
-        <!--            <TextView-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_marginStart="16dp"-->
-        <!--                android:layout_marginBottom="10dp"-->
-        <!--                android:fontFamily="@font/pretendard_bold"-->
-        <!--                android:text="@string/setprofile_profile_pic"-->
-        <!--                android:textColor="@color/gray09"-->
-        <!--                android:textSize="18sp" />-->
+            <TextView
+                android:id="@+id/gender_title"
+                style="@style/Theme.AppCompat.TextView.Profile.Username.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:text="@string/setprofile_gender" />
 
-        <!--            <LinearLayout-->
-        <!--                android:id="@+id/profile_choose_1"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_marginStart="16dp"-->
-        <!--                android:layout_marginEnd="16dp"-->
-        <!--                android:orientation="horizontal">-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="horizontal">
 
-        <!--                <de.hdodenhof.circleimageview.CircleImageView-->
-        <!--                    android:id="@+id/profile_happy_dim"-->
-        <!--                    android:layout_width="0dp"-->
-        <!--                    android:layout_height="80dp"-->
-        <!--                    android:layout_weight="1"-->
-        <!--                    android:src="@drawable/img_user_profile_happy_dim" />-->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/man_btn"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginEnd="12.5dp"
+                    android:layout_marginBottom="1dp"
+                    android:visibility="visible"
+                    app:cardCornerRadius="15dp"
+                    app:strokeColor="#d9d9d9"
+                    app:strokeWidth="3dp"
 
-        <!--                <de.hdodenhof.circleimageview.CircleImageView-->
-        <!--                    android:id="@+id/profile_disgusting"-->
-        <!--                    android:layout_width="0dp"-->
-        <!--                    android:layout_height="80dp"-->
-        <!--                    android:layout_weight="1"-->
-        <!--                    android:src="@drawable/img_user_profile_disgusting" />-->
+                    >
 
-        <!--                <de.hdodenhof.circleimageview.CircleImageView-->
-        <!--                    android:id="@+id/profile_cry"-->
-        <!--                    android:layout_width="0dp"-->
-        <!--                    android:layout_height="80dp"-->
-        <!--                    android:layout_weight="1"-->
-        <!--                    android:src="@drawable/img_user_profile_sad" />-->
-
-        <!--                <de.hdodenhof.circleimageview.CircleImageView-->
-        <!--                    android:id="@+id/profile_angry"-->
-        <!--                    android:layout_width="0dp"-->
-        <!--                    android:layout_height="80dp"-->
-        <!--                    android:layout_weight="1"-->
-        <!--                    android:src="@drawable/img_user_profile_angry" />-->
-
-
-
-        <!--            </LinearLayout>-->
+                    <TextView
+                        android:id="@+id/man_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center_horizontal"
+                        android:letterSpacing="0"
+                        android:lineSpacingExtra="-7sp"
+                        android:text="@string/setprofile_gender_man"
+                        android:textColor="#979797"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
 
 
-        <!--            <LinearLayout-->
-        <!--                android:id="@+id/profile_choose_2"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_marginStart="16dp"-->
-        <!--                android:layout_marginTop="12dp"-->
-        <!--                android:layout_marginEnd="16dp"-->
-        <!--                android:orientation="horizontal">-->
+                </com.google.android.material.card.MaterialCardView>
 
-        <!--                <de.hdodenhof.circleimageview.CircleImageView-->
-        <!--                    android:id="@+id/profile_pray"-->
-        <!--                    android:layout_width="0dp"-->
-        <!--                    android:layout_height="80dp"-->
-        <!--                    android:layout_weight="1"-->
-        <!--                    android:src="@drawable/img_user_profile_pray" />-->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/woman_btn"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:visibility="visible"
+                    app:cardCornerRadius="15dp"
+                    app:strokeColor="#d9d9d9"
+                    app:strokeWidth="3dp"
 
-        <!--                <de.hdodenhof.circleimageview.CircleImageView-->
-        <!--                    android:id="@+id/profile_wink"-->
-        <!--                    android:layout_width="0dp"-->
-        <!--                    android:layout_height="80dp"-->
-        <!--                    android:layout_weight="1"-->
-        <!--                    android:src="@drawable/img_user_profile_wink" />-->
+                    >
 
-        <!--                <de.hdodenhof.circleimageview.CircleImageView-->
-        <!--                    android:id="@+id/profile_greedy"-->
-        <!--                    android:layout_width="0dp"-->
-        <!--                    android:layout_height="80dp"-->
-        <!--                    android:layout_weight="1"-->
-        <!--                    android:src="@drawable/img_user_profile_greedy" />-->
-
-        <!--                <de.hdodenhof.circleimageview.CircleImageView-->
-        <!--                    android:id="@+id/profile_sunglass"-->
-        <!--                    android:layout_width="0dp"-->
-        <!--                    android:layout_height="80dp"-->
-        <!--                    android:layout_weight="1"-->
-        <!--                    android:src="@drawable/img_user_profile_sunglass" />-->
+                    <TextView
+                        android:id="@+id/woman_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center_horizontal"
+                        android:letterSpacing="0"
+                        android:lineSpacingExtra="-7sp"
+                        android:text="@string/setprofile_gender_woman"
+                        android:textColor="#979797"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
 
 
-        <!--            </LinearLayout>-->
+                </com.google.android.material.card.MaterialCardView>
 
 
-        <!--            <LinearLayout-->
-        <!--                android:id="@+id/profile_choose_3"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_marginStart="16dp"-->
-        <!--                android:layout_marginTop="12dp"-->
-        <!--                android:layout_marginEnd="16dp"-->
-        <!--                android:orientation="horizontal">-->
+            </LinearLayout>
 
-        <!--                <de.hdodenhof.circleimageview.CircleImageView-->
-        <!--                    android:id="@+id/profile_hear"-->
-        <!--                    android:layout_width="0dp"-->
-        <!--                    android:layout_height="80dp"-->
-        <!--                    android:layout_weight="1"-->
-        <!--                    android:src="@drawable/img_user_profile_heart" />-->
-
-        <!--                <de.hdodenhof.circleimageview.CircleImageView-->
-        <!--                    android:id="@+id/profile_fire"-->
-        <!--                    android:layout_width="0dp"-->
-        <!--                    android:layout_height="80dp"-->
-        <!--                    android:layout_weight="1"-->
-        <!--                    android:src="@drawable/img_user_profile_fire" />-->
-
-        <!--                <de.hdodenhof.circleimageview.CircleImageView-->
-        <!--                    android:id="@+id/profile_firecrackers"-->
-        <!--                    android:layout_width="0dp"-->
-        <!--                    android:layout_height="80dp"-->
-        <!--                    android:layout_weight="1"-->
-        <!--                    android:src="@drawable/img_user_profile_firecrackers" />-->
-
-        <!--                <de.hdodenhof.circleimageview.CircleImageView-->
-        <!--                    android:id="@+id/profile_eyes"-->
-        <!--                    android:layout_width="0dp"-->
-        <!--                    android:layout_height="80dp"-->
-        <!--                    android:layout_weight="1"-->
-        <!--                    android:src="@drawable/img_user_profile_eyes" />-->
+        </LinearLayout>
 
 
-        <!--            </LinearLayout>-->
 
-
-        <!--        </LinearLayout>-->
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/send_card_view"

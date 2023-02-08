@@ -12,6 +12,8 @@
     <string name="setprofile_gender_man">남자</string>
     <string name="setprofile_gender_woman">여자</string>
     <string name="setprofile_age">생년월일</string>
+    <string name="setprofile_age_hint">생년월일 19991129</string>
+    <string name="ok_text">확인</string>
 
 
 </resources>
