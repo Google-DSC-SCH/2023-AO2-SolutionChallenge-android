@@ -1,6 +1,7 @@
 package com.ao2.run_eat.ui.setProfile
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -32,7 +33,6 @@ class SetProfileFragment : BaseFragment<FragmentSetProfileBinding, SetProfileVie
         }
         exception = viewModel.errorEvent
         initEditText()
-//        countEditTextMessage()
     }
 
     override fun initDataBinding() {
@@ -50,6 +50,17 @@ class SetProfileFragment : BaseFragment<FragmentSetProfileBinding, SetProfileVie
     }
 
     override fun initAfterBinding() {
+        // 사용자 남자 성별 클릭
+        binding.manBtn.setOnClickListener{
+            binding.manBtn.strokeColor = Color.parseColor("#007680")
+            binding.womanBtn.strokeColor = Color.parseColor("#d9d9d9")
+        }
+
+        // 사용자 여자 성별 클릭
+        binding.womanBtn.setOnClickListener {
+            binding.womanBtn.strokeColor = Color.parseColor("#007680")
+            binding.manBtn.strokeColor = Color.parseColor("#d9d9d9")
+        }
     }
 
 //    private fun setProfileImageBottomSheet(profile: Profile) {
@@ -81,22 +92,4 @@ class SetProfileFragment : BaseFragment<FragmentSetProfileBinding, SetProfileVie
         })
         bottomSheet.show(requireActivity().supportFragmentManager, TAG)
     }
-
-//    private fun countEditTextMessage() {
-//        lifecycleScope.launchWhenStarted {
-//            viewModel.editTextMessageCountEvent.collectLatest {
-//                binding.editTextCount.text = "$it/15"
-//
-//                if (it != 0) {
-//                    binding.editTextCount.text =
-//                        textChangeColor(
-//                            binding.editTextCount,
-//                            "#000000",
-//                            0,
-//                            it.toString().length
-//                        )
-//                }
-//            }
-//        }
-//    }
 }
