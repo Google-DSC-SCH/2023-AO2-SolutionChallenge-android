@@ -74,10 +74,9 @@ class SetProfileFragment :
             viewModel.navigationHandler.collectLatest {
                 when (it) {
                     is SetProfileNavigationAction.NavigateToSetProfileImage -> { editProfileImageBottomSheet() }
-//                    is SetProfileNavigationAction.NavigateToHome -> navigate(SetProfileFragmentDirections.actionSetProfileFragmentToHomeFragment())
+                    is SetProfileNavigationAction.NavigateToHome -> navigate(SetProfileFragmentDirections.actionSetProfileFragmentToHomeFragment())
                     is SetProfileNavigationAction.NavigateToEmpty -> toastMessage("닉네임이 비어 있습니다!")
                     is SetProfileNavigationAction.NavigateToAgeNumberPicker -> ageNumberPicker()
-                    else -> {}
                 }
             }
         }
