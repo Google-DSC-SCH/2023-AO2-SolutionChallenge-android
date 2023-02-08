@@ -9,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlinx.coroutines.flow.*
+import okhttp3.MultipartBody
 
 @HiltViewModel
 class SetProfileViewModel @Inject constructor(
@@ -32,6 +33,7 @@ class SetProfileViewModel @Inject constructor(
     val setPossibleState: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
 
 //    val profileImg: MutableStateFlow<Profile?> = MutableStateFlow(null)
+    val profileImg: MutableStateFlow<String> = MutableStateFlow("")
 
     init {
         baseViewModelScope.launch {
@@ -54,7 +56,18 @@ class SetProfileViewModel @Inject constructor(
                 onAgeEditTextCount(it.length)
             }
         }
+        baseViewModelScope.launch {
+            showLoading()
+//            mainRepository.getUserProfile()
+//                .onSuccess {
+//                    beforeProfile = it
+//                    profileImg.emit(it.profile_path)
+//                    profileName.emit(it.nickname)
+//                }
+            dismissLoading()
+        }
     }
+
 
     private fun onEditTextCount(count: Int) {
         baseViewModelScope.launch {
@@ -92,9 +105,18 @@ class SetProfileViewModel @Inject constructor(
 
     override fun onProfileImageSetClicked() {
         baseViewModelScope.launch {
-//            profileImg.value?.let {
-//                _navigationHandler.emit(SetProfileNavigationAction.NavigateToSetProfileImage(profile = it))
-//            }
+            _navigationHandler.emit(SetProfileNavigationAction.NavigateToSetProfileImage)
+        }
+    }
+
+    fun setFileToUri(file: MultipartBody.Part) {
+        baseViewModelScope.launch {
+            showLoading()
+//            mainRepository.postFileToUrl(file = file)
+//                .onSuccess {
+//                    profileImg.value = it.image_url
+//                }
+            dismissLoading()
         }
     }
 

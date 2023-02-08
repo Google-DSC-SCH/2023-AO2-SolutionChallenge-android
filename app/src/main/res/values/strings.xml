@@ -14,6 +14,9 @@
     <string name="setprofile_age">생년월일</string>
     <string name="setprofile_age_hint">생년월일 8자리를 입력해주세요</string>
     <string name="ok_text">확인</string>
+    <string name="camera">카메라</string>
+    <string name="close">취소</string>
+    <string name="gallery">내 사진첩</string>
 
 
 </resources>
