@@ -4,4 +4,6 @@ interface SetProfileActionHandler {
     fun onProfileImageSetClicked()
     fun onSelectionDoneClicked()
     fun onAgeSetClicked()
+    fun onGenderManClicked()
+    fun onGenderWomanClicked()
 }

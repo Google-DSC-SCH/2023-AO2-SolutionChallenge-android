@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewmodel"
             type="com.ao2.run_eat.ui.setProfile.SetProfileViewModel" />
@@ -33,11 +33,11 @@
             android:id="@+id/user_profile_edit_btn"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="119dp"
-            android:onClick="@{() -> viewmodel.onProfileImageSetClicked()}">
+            android:onClick="@{() -> viewmodel.onProfileImageSetClicked()}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/user_profile_edit"
@@ -49,14 +49,14 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"/>
+                app:layout_constraintVertical_bias="0.0" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:src="@drawable/img_user_profile_set_button"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                android:src="@drawable/img_user_profile_set_button"/>
+                app:layout_constraintRight_toRightOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -64,8 +64,8 @@
             android:id="@+id/nickname_frame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginTop="246dp"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -73,20 +73,20 @@
             app:layout_constraintVertical_bias="0.4">
 
             <TextView
-                style="@style/Theme.AppCompat.TextView.Profile.Username.Title"
                 android:id="@+id/user_name_title"
+                style="@style/Theme.AppCompat.TextView.Profile.Username.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/setprofile_nickname"
-                android:layout_marginBottom="3dp"/>
+                android:layout_marginBottom="3dp"
+                android:text="@string/setprofile_nickname" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@drawable/custom_backgroundwhite_radius16"
                 android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp">
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/custom_backgroundwhite_radius16"
+                android:orientation="horizontal">
 
 
                 <EditText
@@ -95,11 +95,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="0dp"
+                    android:layout_weight="1"
                     android:background="@color/transparent"
                     android:hint="@string/setprofile_nickname_hint"
-                    android:text="@={viewmodel.nicknameInputContent}"
                     android:maxLength="15"
-                    android:layout_weight="1"
+                    android:text="@={viewmodel.nicknameInputContent}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/user_name_title" />
 
@@ -110,9 +110,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
+                    android:text="0/15"
                     android:textColor="@color/gray05"
-                    app:nicknameEditTextCount="@{viewmodel.nicknameEditTextCountEvent}"
-                    android:text="0/15">
+                    app:nicknameEditTextCount="@{viewmodel.nicknameEditTextCountEvent}">
 
                 </TextView>
 
@@ -141,11 +141,11 @@
                 android:text="@string/setprofile_age" />
 
             <LinearLayout
-                android:background="@drawable/custom_backgroundwhite_radius16"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:background="@drawable/custom_backgroundwhite_radius16"
                 android:orientation="horizontal">
 
                 <EditText
@@ -154,12 +154,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="0dp"
+                    android:layout_weight="1"
                     android:background="@color/transparent"
                     android:hint="@string/setprofile_age_hint"
-                    android:text="@={viewmodel.ageInputContent}"
                     android:inputType="number"
                     android:maxLength="8"
-                    android:layout_weight="1"
+                    android:text="@={viewmodel.ageInputContent}"
                     app:layout_constraintStart_toStartOf="parent" />
 
 
@@ -169,9 +169,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
+                    android:text="0/8"
                     android:textColor="@color/gray05"
-                    app:ageEditTextCount="@{viewmodel.ageEditTextCountEvent}"
-                    android:text="0/8">
+                    app:ageEditTextCount="@{viewmodel.ageEditTextCountEvent}">
 
                 </TextView>
 
@@ -208,19 +208,19 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/man_btn"
-                    android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="1dp"
                     android:layout_marginTop="1dp"
                     android:layout_marginEnd="12.5dp"
                     android:layout_marginBottom="1dp"
+                    android:layout_weight="1"
                     android:visibility="visible"
                     app:cardCornerRadius="15dp"
+                    app:manBtnClicked="@{viewmodel.isManEvent}"
+                    android:onClick="@{() -> viewmodel.onGenderManClicked()}"
                     app:strokeColor="#d9d9d9"
-                    app:strokeWidth="3dp"
-
-                    >
+                    app:strokeWidth="3dp">
 
                     <TextView
                         android:id="@+id/man_txt"
@@ -240,16 +240,18 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/woman_btn"
-                    android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="1dp"
                     android:layout_marginTop="1dp"
                     android:layout_marginBottom="1dp"
+                    android:layout_weight="1"
                     android:visibility="visible"
                     app:cardCornerRadius="15dp"
+                    android:onClick="@{() -> viewmodel.onGenderWomanClicked()}"
                     app:strokeColor="#d9d9d9"
                     app:strokeWidth="3dp"
+                    app:womanBtnClicked="@{viewmodel.isManEvent}"
 
                     >
 
@@ -275,8 +277,6 @@
         </LinearLayout>
 
 
-
-
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/send_card_view"
             android:layout_width="match_parent"
@@ -285,20 +285,21 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="24dp"
             android:backgroundTint="@color/main_yellow_light_mode"
+            android:onClick="@{() -> viewmodel.onSelectionDoneClicked()}"
             app:cardCornerRadius="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:onClick="@{() -> viewmodel.onSelectionDoneClicked()}">
+            app:layout_constraintStart_toStartOf="parent">
+
             <TextView
                 android:id="@+id/some_id"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:textSize="18dp"
+                android:lineSpacingExtra="4sp"
                 android:text="선택 완료!"
                 android:textColor="@color/black"
-                android:lineSpacingExtra="4sp" />
+                android:textSize="18dp" />
 
 
         </com.google.android.material.card.MaterialCardView>

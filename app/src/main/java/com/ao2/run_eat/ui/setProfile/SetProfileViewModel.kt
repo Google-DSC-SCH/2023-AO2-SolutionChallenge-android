@@ -1,5 +1,6 @@
 package com.ao2.run_eat.ui.setProfile
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.ao2.run_eat.base.BaseViewModel
 import com.ao2.run_eat.ui.setProfile.SetProfileActionHandler
@@ -23,6 +24,9 @@ class SetProfileViewModel @Inject constructor(
 
     var ageInputContent = MutableStateFlow<String>("")
     var ageEditTextCountEvent = MutableStateFlow<Int>(0)
+
+    var isManEvent = MutableStateFlow<Boolean?>(null)
+
 
     val setBtnState: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
     val setPossibleState: MutableStateFlow<Boolean> = MutableStateFlow<Boolean>(false)
@@ -53,14 +57,28 @@ class SetProfileViewModel @Inject constructor(
     }
 
     private fun onEditTextCount(count: Int) {
-        viewModelScope.launch {
+        baseViewModelScope.launch {
             nicknameEditTextCountEvent.value = count
         }
     }
 
     private fun onAgeEditTextCount(count: Int) {
-        viewModelScope.launch {
+        baseViewModelScope.launch {
             ageEditTextCountEvent.value = count
+        }
+    }
+
+    override fun onGenderManClicked(){
+        baseViewModelScope.launch {
+            isManEvent.value = true
+        }
+
+    }
+
+    override fun onGenderWomanClicked(){
+        baseViewModelScope.launch {
+            Log.d("ttt", "누름")
+            isManEvent.value = false
         }
     }
 

@@ -16,14 +16,15 @@ import kotlinx.coroutines.flow.collectLatest
 
 
 @AndroidEntryPoint
-class SetProfileFragment : BaseFragment<FragmentSetProfileBinding, SetProfileViewModel>(R.layout.fragment_set_profile) {
+class SetProfileFragment :
+    BaseFragment<FragmentSetProfileBinding, SetProfileViewModel>(R.layout.fragment_set_profile) {
 
     private val TAG = "SetProfileFragment"
 
     override val layoutResourceId: Int
         get() = R.layout.fragment_set_profile
 
-    override val viewModel : SetProfileViewModel by viewModels()
+    override val viewModel: SetProfileViewModel by viewModels()
     private val navController by lazy { findNavController() }
 
     override fun initStartView() {
@@ -38,7 +39,7 @@ class SetProfileFragment : BaseFragment<FragmentSetProfileBinding, SetProfileVie
     override fun initDataBinding() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigationHandler.collectLatest {
-                when(it) {
+                when (it) {
 //                    is SetProfileNavigationAction.NavigateToSetProfileImage -> { setProfileImageBottomSheet(profile = it.profile) }
 //                    is SetProfileNavigationAction.NavigateToHome -> navigate(SetProfileFragmentDirections.actionSetProfileFragmentToHomeFragment())
                     is SetProfileNavigationAction.NavigateToEmpty -> toastMessage("닉네임이 비어 있습니다!")
@@ -49,19 +50,7 @@ class SetProfileFragment : BaseFragment<FragmentSetProfileBinding, SetProfileVie
         }
     }
 
-    override fun initAfterBinding() {
-        // 사용자 남자 성별 클릭
-        binding.manBtn.setOnClickListener{
-            binding.manBtn.strokeColor = Color.parseColor("#007680")
-            binding.womanBtn.strokeColor = Color.parseColor("#d9d9d9")
-        }
-
-        // 사용자 여자 성별 클릭
-        binding.womanBtn.setOnClickListener {
-            binding.womanBtn.strokeColor = Color.parseColor("#007680")
-            binding.manBtn.strokeColor = Color.parseColor("#d9d9d9")
-        }
-    }
+    override fun initAfterBinding() {}
 
 //    private fun setProfileImageBottomSheet(profile: Profile) {
 //        val dialog = DefaultImageDialog(isCheckedImage = profile) { profile ->
@@ -85,8 +74,10 @@ class SetProfileFragment : BaseFragment<FragmentSetProfileBinding, SetProfileVie
         }
     }
 
+    /**
+     * 날짜 선택하는 바텀 시트를 개발했지만 플로우가 긴 느낌이 들어서 일단 보류
+     * */
     private fun ageNumberPicker() {
-        Log.d("ttt", "ageNumberPicker 실행")
         val bottomSheet = BottomAgeNumberPicker(callback = {
             toastMessage(it.toString())
         })
