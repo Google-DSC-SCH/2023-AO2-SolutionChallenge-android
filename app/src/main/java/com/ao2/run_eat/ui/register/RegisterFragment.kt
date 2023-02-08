@@ -113,6 +113,11 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
     }
 
     private fun googleLogin() {
+        /** 구글 클라우드 플랫폼에서 해당 프로젝트로 들어가면 OAuth 2.0 설정을 한 경우 아래와 같이 나오는데,
+         *  이 중 OAuth 2.0 클라이언트 ID 밑의 "Web Client"를 클릭한다.
+         *  그러면 오른쪽 위에 클라이언트 ID가 보이는데 그것을 requestIdToken에 넣으면 된다.
+         *  R.string.default_web_client_id를 넣어도 작동한다고 하는데 나는 잘 되지 않는다.
+         */
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(BuildConfig.GOOGLE_LOGIN_CLIENT_ID)
             .requestEmail()
@@ -129,19 +134,14 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
-            Log.d("ttt", completedTask.toString())
-            Log.d("ttt", completedTask.result.email.toString())
-            Log.d("ttt", completedTask.result.idToken.toString())
+            Log.d(TAG, completedTask.result.idToken.toString())
 
             val idToken = completedTask.getResult(ApiException::class.java).idToken
             idToken?.let { token ->
-                Log.d("ttt", token.toString())
-//                viewModel.oauthLogin(idToken = token)
+                viewModel.oauthLogin(idToken = token)
             }
         } catch (e: ApiException){
             toastMessage("구글 로그인에 실패 하였습니다.")
         }
     }
-
-
 }
