@@ -22,7 +22,15 @@
           }
         },
         {
-          "client_id": "213617031580-orml9vnuo1qudau0t600kj96n5iugjks.apps.googleusercontent.com",
+          "client_id": "213617031580-kt37e5doc391rploo1ljnf7q244n83cs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ao2.run_eat",
+            "certificate_hash": "0221f165f854c7ff17344cdb38c2afc13f38d7fb"
+          }
+        },
+        {
+          "client_id": "213617031580-3bjijd93fo1fh4jekjo088s6qbb6p6rt.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -35,7 +43,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "213617031580-orml9vnuo1qudau0t600kj96n5iugjks.apps.googleusercontent.com",
+              "client_id": "213617031580-3bjijd93fo1fh4jekjo088s6qbb6p6rt.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
