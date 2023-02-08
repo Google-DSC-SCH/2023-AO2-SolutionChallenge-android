@@ -48,9 +48,7 @@ class SetProfileFragment :
 
     // 요청하고자 하는 권한들
     private val permissionList = arrayOf(
-        Manifest.permission.CAMERA,
-        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-        Manifest.permission.READ_EXTERNAL_STORAGE)
+        Manifest.permission.CAMERA)
 
     // 권한을 허용하도록 요청
     private val requestMultiplePermission = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { results ->

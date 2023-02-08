@@ -1,5 +1,6 @@
 package com.ao2.run_eat.ui.register
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
 import android.app.NotificationChannel
@@ -35,24 +36,43 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
-class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel>(R.layout.fragment_register) {
+class RegisterFragment :
+    BaseFragment<FragmentRegisterBinding, RegisterViewModel>(R.layout.fragment_register) {
 
     private val TAG = "RegisterFragment"
 
     override val layoutResourceId: Int
         get() = R.layout.fragment_register
 
-    override val viewModel : RegisterViewModel by viewModels()
+    override val viewModel: RegisterViewModel by viewModels()
     private val navController by lazy { findNavController() }
 
-    private var googleLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == RESULT_OK) {
-            val data: Intent? = result.data
-            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
-            Log.d("ttt", "ㅇㅁㄴㅇ")
-            handleSignInResult(task)
+    private var googleLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val data: Intent? = result.data
+                val task: Task<GoogleSignInAccount> =
+                    GoogleSignIn.getSignedInAccountFromIntent(data)
+                handleSignInResult(task)
+            }
         }
-    }
+
+    // 요청하고자 하는 권한들
+    private val permissionList = arrayOf(
+        Manifest.permission.CAMERA,
+        Manifest.permission.POST_NOTIFICATIONS
+    )
+
+    // 권한을 허용하도록 요청
+    private val requestMultiplePermission =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { results ->
+            results.forEach {
+                Log.d("ttt key ", it.key)
+                Log.d("ttt value", it.value.toString())
+
+                if (!it.value) toastMessage("권한 허용 필요")
+            }
+        }
 
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -62,6 +82,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
             this.lifecycleOwner = viewLifecycleOwner
         }
         exception = viewModel.errorEvent
+        requestMultiplePermission.launch(permissionList)
 
         createNotification()
 
@@ -70,34 +91,26 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
     override fun initDataBinding() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigationHandler.collectLatest {
-                when(it) {
+                when (it) {
                     is RegisterNavigationAction.NavigateToPushSetting -> {
-                        if(!viewModel.notificationAgreed.value) {
+                        if (!viewModel.notificationAgreed.value) {
 //                            pushSettingDialog()
                             toastMessage("푸쉬 알림 전송 권한 없음")
                         } else {
                             viewModel.sendNotification()
                             toastMessage("푸쉬 알림 전송 완료")
-                        } }
+                        }
+                    }
                     is RegisterNavigationAction.NavigateToNotificationAlarm -> createNotification()
                     is RegisterNavigationAction.NavigateToGoogleLogin -> googleLogin()
-                    is RegisterNavigationAction.NavigateToLoginFirst -> navigate(RegisterFragmentDirections.actionRegisterFragmentToSetProfileFragment())
+                    is RegisterNavigationAction.NavigateToLoginFirst -> navigate(
+                        RegisterFragmentDirections.actionRegisterFragmentToSetProfileFragment()
+                    )
                     else -> {}
                 }
             }
         }
     }
-//    private fun createNotificationChannel(context: Context) {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            val name = "my-notification-channel"
-//            val importance = NotificationManager.IMPORTANCE_DEFAULT
-//            val channelId = "${context.packageName}-$name"
-//            val channel = NotificationChannel(channelId, name, importance)
-//            channel.description = "my notification channel description"
-//            val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-//            notificationManager.createNotificationChannel(channel)
-//        }
-//    }
 
 
     override fun initAfterBinding() {
@@ -140,7 +153,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
             idToken?.let { token ->
                 viewModel.oauthLogin(idToken = token)
             }
-        } catch (e: ApiException){
+        } catch (e: ApiException) {
             toastMessage("구글 로그인에 실패 하였습니다.")
         }
     }
