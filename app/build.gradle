@@ -12,6 +12,7 @@ plugins {
 // local.properties 사용을 위함
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def GOOGLE_MAP_API_KEY = properties.getProperty('google.map.api.key')
 
 android {
     namespace 'com.ao2.run_eat'
@@ -25,6 +26,11 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // 매니페스트에서 사용할려면 이 코드를 사용해주세요.
+        manifestPlaceholders = [
+                GOOGLE_MAP_API_KEY: GOOGLE_MAP_API_KEY
+        ]
 
         // url 변수 지정
         buildConfigField "String", "GOOGLE_LOGIN_CLIENT_ID", properties['google.login.clientId']
@@ -142,4 +148,8 @@ dependencies {
 
     // paging
     implementation "androidx.paging:paging-runtime-ktx:3.0.1"
+
+    // Google Maps
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
 }
