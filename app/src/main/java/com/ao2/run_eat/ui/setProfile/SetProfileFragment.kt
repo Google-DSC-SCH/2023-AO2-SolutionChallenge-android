@@ -48,14 +48,16 @@ class SetProfileFragment :
 
     // 요청하고자 하는 권한들
     private val permissionList = arrayOf(
-        Manifest.permission.CAMERA)
+        Manifest.permission.CAMERA
+    )
 
     // 권한을 허용하도록 요청
-    private val requestMultiplePermission = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { results ->
-        results.forEach {
-            if(!it.value) toastMessage("권한 허용 필요")
+    private val requestMultiplePermission =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { results ->
+            results.forEach {
+                if (!it.value) toastMessage("권한 허용 필요")
+            }
         }
-    }
 
     override fun initStartView() {
         binding.apply {
@@ -71,8 +73,14 @@ class SetProfileFragment :
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigationHandler.collectLatest {
                 when (it) {
-                    is SetProfileNavigationAction.NavigateToSetProfileImage -> { editProfileImageBottomSheet() }
-                    is SetProfileNavigationAction.NavigateToHome -> navigate(SetProfileFragmentDirections.actionSetProfileFragmentToHomeFragment())
+                    is SetProfileNavigationAction.NavigateToSetProfileImage -> {
+                        editProfileImageBottomSheet()
+                    }
+                    is SetProfileNavigationAction.NavigateToHome -> navigate(SetProfileFragmentDirections.actionSetProfileFragmentToHomeFragment()
+                    )
+                    is SetProfileNavigationAction.NavigateToRunning -> navigate(
+                        SetProfileFragmentDirections.actionSetProfileFragmentToRunningFragment()
+                    )
                     is SetProfileNavigationAction.NavigateToEmpty -> toastMessage("닉네임이 비어 있습니다!")
                     is SetProfileNavigationAction.NavigateToAgeNumberPicker -> ageNumberPicker()
                 }
@@ -83,16 +91,19 @@ class SetProfileFragment :
     override fun initAfterBinding() {}
 
     private fun initRegisterForActivityResult() {
-        galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
-            activityResult.data?.let {
-                createFile(it.data!!)
+        galleryLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
+                activityResult.data?.let {
+                    createFile(it.data!!)
+                }
             }
-        }
 
         cameraLauncher = registerForActivityResult(ActivityResultContracts.TakePicture()) {
-            if(it) { cameraUri?.let { uri ->
-                createFile(uri)
-            } }
+            if (it) {
+                cameraUri?.let { uri ->
+                    createFile(uri)
+                }
+            }
         }
     }
 
@@ -112,7 +123,7 @@ class SetProfileFragment :
     private fun editProfileImageBottomSheet() {
         requestMultiplePermission.launch(permissionList)
         val dialog = EditProfileImageBottomSheet {
-            if(it) getGalleryImage()
+            if (it) getGalleryImage()
             else getCaptureImage()
 
             lifecycleScope.launch {
@@ -121,6 +132,7 @@ class SetProfileFragment :
         }
         dialog.show(childFragmentManager, TAG)
     }
+
     private fun getGalleryImage() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
@@ -141,7 +153,10 @@ class SetProfileFragment :
             put(MediaStore.Images.Media.DISPLAY_NAME, "img_$now.jpg")
             put(MediaStore.Images.Media.MIME_TYPE, "image/jpg")
         }
-        return requireContext().contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, content)
+        return requireContext().contentResolver.insert(
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            content
+        )
     }
 
     private fun createFile(uri: Uri) {

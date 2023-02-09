@@ -142,7 +142,7 @@ class SetProfileViewModel @Inject constructor(
 //                        val fcmToken = sSharedPreferences.getString("fcm_token", null)
 //                        mainRepository.postNotificationToken(device_id = deviceId!!, token = fcmToken!!)
 //                            .onSuccess {
-                                _navigationHandler.emit(SetProfileNavigationAction.NavigateToHome)
+                                _navigationHandler.emit(SetProfileNavigationAction.NavigateToRunning)
 //                            }
 //                    }
 //                }

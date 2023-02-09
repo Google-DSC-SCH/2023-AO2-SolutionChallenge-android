@@ -8,5 +8,6 @@ sealed class SetProfileNavigationAction {
     object NavigateToHome: SetProfileNavigationAction()
     object NavigateToEmpty: SetProfileNavigationAction()
     object NavigateToAgeNumberPicker: SetProfileNavigationAction()
+    object NavigateToRunning: SetProfileNavigationAction()
 
 }
