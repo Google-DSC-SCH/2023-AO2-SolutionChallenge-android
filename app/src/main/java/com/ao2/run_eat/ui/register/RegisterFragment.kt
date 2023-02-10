@@ -60,8 +60,11 @@ class RegisterFragment :
     // 요청하고자 하는 권한들
     private val permissionList = arrayOf(
         Manifest.permission.CAMERA,
-        Manifest.permission.POST_NOTIFICATIONS
-    )
+        Manifest.permission.POST_NOTIFICATIONS,
+        Manifest.permission.ACCESS_COARSE_LOCATION,
+        Manifest.permission.ACCESS_FINE_LOCATION,
+
+        )
 
     // 권한을 허용하도록 요청
     private val requestMultiplePermission =
