@@ -417,4 +417,37 @@
         <item name="android:windowSoftInputMode">adjustResize</item>
     </style>
 
+
+    <!--Todo Style-->
+    <style name="Widget.Todo.Button.Home.Add.Normal" parent="Widget.AppCompat.Button">
+        <item name="android:src">@drawable/ic_add_normal</item>
+        <item name="android:backgroundTint">@color/purple_200</item>
+    </style>
+
+    <style name="Widget.Todo.Button.Home.Add.Check" parent="Widget.AppCompat.Button">
+        <item name="android:src">@drawable/ic_add_normal</item>
+        <item name="android:backgroundTint">@color/purple_200</item>
+    </style>
+
+    <style name="Widget.Todo.Button.Home.Add" parent="Widget.AppCompat.Button">
+        <item name="android:src">@drawable/ic_add_normal</item>
+        <item name="android:backgroundTint">@color/purple_500</item>
+    </style>
+
+    <style name="Widget.Todo.Button.Home.Delete" parent="Widget.AppCompat.Button">
+        <item name="android:src">@drawable/ic_add_normal</item>
+        <item name="android:backgroundTint">@color/purple_500</item>
+    </style>
+
+    <style name="Widget.Todo.Button.Home.Paging" parent="Widget.AppCompat.Button">
+        <item name="android:src">@drawable/ic_add_normal</item>
+        <item name="android:backgroundTint">@color/purple_500</item>
+    </style>
+
+    <style name="Widget.Todo.Button.Paging.Up" parent="Widget.AppCompat.Button">
+        <item name="android:src">@drawable/ic_add_normal</item>
+        <item name="android:backgroundTint">@color/purple_200</item>
+    </style>
+
+
 </resources>
