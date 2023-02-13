@@ -78,9 +78,6 @@ class SetProfileFragment :
                     }
                     is SetProfileNavigationAction.NavigateToHome -> navigate(SetProfileFragmentDirections.actionSetProfileFragmentToHomeFragment()
                     )
-                    is SetProfileNavigationAction.NavigateToRunning -> navigate(
-                        SetProfileFragmentDirections.actionSetProfileFragmentToRunningFragment()
-                    )
                     is SetProfileNavigationAction.NavigateToEmpty -> toastMessage("닉네임이 비어 있습니다!")
                     is SetProfileNavigationAction.NavigateToAgeNumberPicker -> ageNumberPicker()
                 }

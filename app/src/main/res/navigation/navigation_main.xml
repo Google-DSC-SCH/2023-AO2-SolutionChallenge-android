@@ -19,6 +19,9 @@
         android:name="com.ao2.run_eat.ui.home.HomeFragment"
         android:label="HomeFragment">
 
+        <action
+            android:id="@+id/action_homeFragment_to_RunningFragment"
+            app:destination="@id/RunningFragment" />
     </fragment>
 
     <fragment
@@ -42,9 +45,7 @@
         <action
             android:id="@+id/action_setProfileFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_setProfileFragment_to_RunningFragment"
-            app:destination="@id/RunningFragment" />
+
     </fragment>
 
     <fragment

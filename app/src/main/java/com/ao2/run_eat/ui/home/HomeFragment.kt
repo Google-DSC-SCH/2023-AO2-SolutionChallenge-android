@@ -19,7 +19,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
     override val layoutResourceId: Int
         get() = R.layout.fragment_home
 
-    override val viewModel : HomeViewModel by viewModels()
+    override val viewModel: HomeViewModel by viewModels()
 
     override fun initStartView() {
         binding.apply {
@@ -32,14 +32,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
 
     private fun setupEvent() {
         lifecycleScope.launchWhenStarted {
-//            viewModel.navigationEvent.collect {
-//                when(it) {
+            viewModel.navigationHandler.collect {
+                when (it) {
 //                    is HomeNavigationAction.NavigateToInit -> Unit
+                    is HomeNavigationAction.NavigateToRunning -> navigate(HomeFragmentDirections.actionHomeFragmentToRunningFragment())
 //                    is HomeNavigationAction.NavigateToCreate -> navigate(HomeFragmentDirections.actionHomeFragmentToCreateTodoFragment())
 //                    is HomeNavigationAction.NavigateToTodoDetail -> navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(it.todoIdx))
 //                    is HomeNavigationAction.NavigateToPaging -> navigate(HomeFragmentDirections.actionHomeFragmentToPagingFragment())
-//                }
-//            }
+                }
+            }
         }
 
         lifecycleScope.launchWhenStarted {
@@ -83,10 +84,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
             ObjectAnimator.ofFloat(binding.txtToShare, "translationX", 0f).apply { start() }
 
             ObjectAnimator.ofFloat(binding.btToBag, "translationY", 0f).apply { start() }
-            ObjectAnimator.ofFloat(binding.btToBag , "translationX", 0f).apply { start() }
+            ObjectAnimator.ofFloat(binding.btToBag, "translationX", 0f).apply { start() }
 
             ObjectAnimator.ofFloat(binding.txtToBag, "translationY", 0f).apply { start() }
-            ObjectAnimator.ofFloat(binding.txtToBag , "translationX", 0f).apply { start() }
+            ObjectAnimator.ofFloat(binding.txtToBag, "translationX", 0f).apply { start() }
 
 
             ObjectAnimator.ofFloat(binding.btTodo, View.ROTATION, 45f, 0f).apply { start() }
