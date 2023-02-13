@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.ao2.run_eat.NavigationGraphDirections
 import com.ao2.run_eat.R
 import com.ao2.run_eat.base.BaseActivity
 import com.ao2.run_eat.databinding.ActivityMainBinding
@@ -24,7 +25,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     var waitTime = 0L
 
     override fun initStartView() {
-        initNavController()
 
         /** DynamicLink 수신확인 */
         initDynamicLink()
@@ -36,55 +36,22 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     override fun initAfterBinding() {
     }
 
-    private fun initNavController() {
-        navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
-        navController = navHostFragment.navController
-
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.id) {
-//                R.id.homeFragment -> showBottomNav()
-//                R.id.alarmRoomTabFragment -> showBottomNav()
-//                R.id.myPageFragment -> showBottomNav()
-                else -> hideBottomNav()
-            }
-        }
-        binding.bottomNavi.setupWithNavController(navController)
-
-        // 중복터치 막기!!
-        binding.bottomNavi.setOnItemReselectedListener { menuItem ->
-            when (menuItem.itemId) {
-//                R.id.homeFragment -> {}
-//                R.id.alarmRoomTabFragment -> {}
-//                R.id.myPageFragment -> {}
-            }
-        }
-    }
-
-    private fun showBottomNav() {
-        binding.bottomNavi.visibility = View.VISIBLE
-    }
-
-    private fun hideBottomNav() {
-        binding.bottomNavi.visibility = View.GONE
-    }
-
     override fun onBackPressed() {
         try {
             if (onBackPressedDispatcher.hasEnabledCallbacks()) {
                 super.onBackPressed()
             } else {
                 when (navController.currentDestination?.id) {
-//                    R.id.homeFragment -> {
-//                        if(System.currentTimeMillis()-waitTime >= 1500) {
-//                            waitTime = System.currentTimeMillis()
-//                            Toast.makeText(this, getString(R.string.onBackPressed_Message), Toast.LENGTH_SHORT).show()
-//                        } else {
-//                            finishAffinity() // 액티비티 종료
-//                        }
-//                    }
-//                    null -> super.onBackPressed()
-//                    else -> navController.navigate(NavigationGraphDirections.actionMainFragment())
+                    R.id.homeFragment -> {
+                        if(System.currentTimeMillis()-waitTime >= 1500) {
+                            waitTime = System.currentTimeMillis()
+                            Toast.makeText(this, getString(R.string.onBackPressed_Message), Toast.LENGTH_SHORT).show()
+                        } else {
+                            finishAffinity() // 액티비티 종료
+                        }
+                    }
+                    null -> super.onBackPressed()
+                    else -> navController.navigate(NavigationGraphDirections.actionMainFragment())
                 }
             }
         } catch (e: Exception) {
