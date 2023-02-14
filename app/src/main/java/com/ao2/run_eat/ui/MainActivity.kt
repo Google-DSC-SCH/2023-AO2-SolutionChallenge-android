@@ -101,7 +101,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         binding.btTodo.visibility = View.VISIBLE
         binding.btAddTodo.visibility = View.VISIBLE
         binding.btDeleteTodo.visibility = View.VISIBLE
-        binding.btToBag.visibility = View.VISIBLE
+        binding.btToInventory.visibility = View.VISIBLE
         binding.btToPaging.visibility = View.VISIBLE
         binding.btToShare.visibility = View.VISIBLE
     }
@@ -110,7 +110,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         binding.btTodo.visibility = View.GONE
         binding.btAddTodo.visibility = View.GONE
         binding.btDeleteTodo.visibility = View.GONE
-        binding.btToBag.visibility = View.GONE
+        binding.btToInventory.visibility = View.GONE
         binding.btToPaging.visibility = View.GONE
         binding.btToShare.visibility = View.GONE
     }
@@ -142,11 +142,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             ObjectAnimator.ofFloat(binding.txtToShare, "translationY", 0f).apply { start() }
             ObjectAnimator.ofFloat(binding.txtToShare, "translationX", 0f).apply { start() }
 
-            ObjectAnimator.ofFloat(binding.btToBag, "translationY", 0f).apply { start() }
-            ObjectAnimator.ofFloat(binding.btToBag, "translationX", 0f).apply { start() }
+            ObjectAnimator.ofFloat(binding.btToInventory, "translationY", 0f).apply { start() }
+            ObjectAnimator.ofFloat(binding.btToInventory, "translationX", 0f).apply { start() }
 
-            ObjectAnimator.ofFloat(binding.txtToBag, "translationY", 0f).apply { start() }
-            ObjectAnimator.ofFloat(binding.txtToBag, "translationX", 0f).apply { start() }
+            ObjectAnimator.ofFloat(binding.txtToInventory, "translationY", 0f).apply { start() }
+            ObjectAnimator.ofFloat(binding.txtToInventory, "translationX", 0f).apply { start() }
 
             ObjectAnimator.ofFloat(binding.btTodo, View.ROTATION, 45f, 0f).apply { start() }
 
@@ -157,11 +157,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             ObjectAnimator.ofFloat(binding.txtToShare, "translationY", -360f).apply { start() }
             ObjectAnimator.ofFloat(binding.txtToShare, "translationX", +180f).apply { start() }
 
-            ObjectAnimator.ofFloat(binding.btToBag, "translationY", -120f).apply { start() }
-            ObjectAnimator.ofFloat(binding.btToBag, "translationX", +270f).apply { start() }
+            ObjectAnimator.ofFloat(binding.btToInventory, "translationY", -120f).apply { start() }
+            ObjectAnimator.ofFloat(binding.btToInventory, "translationX", +270f).apply { start() }
 
-            ObjectAnimator.ofFloat(binding.txtToBag, "translationY", -120f).apply { start() }
-            ObjectAnimator.ofFloat(binding.txtToBag, "translationX", +270f).apply { start() }
+            ObjectAnimator.ofFloat(binding.txtToInventory, "translationY", -120f).apply { start() }
+            ObjectAnimator.ofFloat(binding.txtToInventory, "translationX", +270f).apply { start() }
 
             ObjectAnimator.ofFloat(binding.btToPaging, "translationY", -500f).apply { start() }
             ObjectAnimator.ofFloat(binding.txtToPaging, "translationY", -500f).apply { start() }
