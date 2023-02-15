@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class InventoryViewModel @Inject constructor(
-    private val mainRepository: MainRepository
+//    private val mainRepository: MainRepository
 ) : BaseViewModel(), InventoryActionHandler {
 
     private val TAG = "InventoryViewModel"
