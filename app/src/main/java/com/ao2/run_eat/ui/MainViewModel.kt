@@ -36,4 +36,11 @@ class MainViewModel @Inject constructor() : BaseViewModel(), MainActionHandler {
             whenToggleState()
         }
     }
+
+    override fun onToggleInventorClicked() {
+        baseViewModelScope.launch {
+            _navigationHandler.emit(MainNavigationAction.NavigateToInventor)
+            whenToggleState()
+        }
+    }
 }

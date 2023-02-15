@@ -54,7 +54,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             when (destination.id) {
                 R.id.homeFragment -> showBottomNav()
                 R.id.RunningFragment -> showBottomNav()
-                R.id.myPageFragment -> showBottomNav()
+                R.id.InventorFragment -> showBottomNav()
                 else -> hideBottomNav()
             }
         }
@@ -82,7 +82,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 when (it) {
 //                    is HomeNavigationAction.NavigateToInit -> Unit
                     is MainNavigationAction.NavigateToRunning -> navController.navigate(R.id.RunningFragment)
-//                    is HomeNavigationAction.NavigateToCreate -> navigate(HomeFragmentDirections.actionHomeFragmentToCreateTodoFragment())
+                    is MainNavigationAction.NavigateToInventor -> navController.navigate(R.id.InventorFragment)
 //                    is HomeNavigationAction.NavigateToTodoDetail -> navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(it.todoIdx))
 //                    is HomeNavigationAction.NavigateToPaging -> navigate(HomeFragmentDirections.actionHomeFragmentToPagingFragment())
                     else -> {}

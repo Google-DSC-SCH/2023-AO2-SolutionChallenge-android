@@ -18,8 +18,8 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.ao2.run_eat.ui.home.HomeFragment"
-        tools:layout="@layout/fragment_home"
-        android:label="HomeFragment">
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
 
         <action
             android:id="@+id/action_homeFragment_to_RunningFragment"
@@ -29,8 +29,8 @@
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.ao2.run_eat.ui.register.RegisterFragment"
-        tools:layout="@layout/fragment_register"
-        android:label="RegisterFragment">
+        android:label="RegisterFragment"
+        tools:layout="@layout/fragment_register">
 
         <action
             android:id="@+id/action_registerFragment_to_homeFragment"
@@ -43,8 +43,8 @@
     <fragment
         android:id="@+id/setProfileFragment"
         android:name="com.ao2.run_eat.ui.setProfile.SetProfileFragment"
-        tools:layout="@layout/fragment_set_profile"
-        android:label="SetProfileFragment">
+        android:label="SetProfileFragment"
+        tools:layout="@layout/fragment_set_profile">
 
         <action
             android:id="@+id/action_setProfileFragment_to_homeFragment"
@@ -54,10 +54,16 @@
 
     <fragment
         android:id="@+id/RunningFragment"
-        tools:layout="@layout/fragment_running"
         android:name="com.ao2.run_eat.ui.running.RunningFragment"
-        android:label="RunningFragment">
+        android:label="RunningFragment"
+        tools:layout="@layout/fragment_running">
+    </fragment>
 
+    <fragment
+        android:id="@+id/InventorFragment"
+        android:name="com.ao2.run_eat.ui.inventory.InventoryFragment"
+        android:label="RunningFragment"
+        tools:layout="@layout/fragment_inventory">
 
     </fragment>
 
