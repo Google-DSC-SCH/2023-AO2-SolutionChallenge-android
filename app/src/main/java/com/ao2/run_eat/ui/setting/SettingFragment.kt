@@ -24,6 +24,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>(R
         }
         exception = viewModel.errorEvent
         setupEvent()
+        viewModel.getOptions()
     }
 
     private fun setupEvent() {
