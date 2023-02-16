@@ -62,8 +62,16 @@
     <fragment
         android:id="@+id/InventorFragment"
         android:name="com.ao2.run_eat.ui.inventory.InventoryFragment"
-        android:label="RunningFragment"
+        android:label="InventorFragment"
         tools:layout="@layout/fragment_inventory">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/SettingFragment"
+        android:name="com.ao2.run_eat.ui.setting.SettingFragment"
+        android:label="SettingFragment"
+        tools:layout="@layout/fragment_setting">
 
     </fragment>
 

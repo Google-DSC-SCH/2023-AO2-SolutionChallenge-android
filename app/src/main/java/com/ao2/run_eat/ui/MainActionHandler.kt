@@ -5,5 +5,6 @@ interface MainActionHandler {
     fun onToggleFab()
     fun onToggleRunningClicked()
     fun onToggleInventorClicked()
+    fun onToggleSettingClicked()
 
 }

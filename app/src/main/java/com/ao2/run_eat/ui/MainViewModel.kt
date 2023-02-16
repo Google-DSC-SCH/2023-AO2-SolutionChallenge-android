@@ -43,4 +43,11 @@ class MainViewModel @Inject constructor() : BaseViewModel(), MainActionHandler {
             whenToggleState()
         }
     }
+
+    override fun onToggleSettingClicked() {
+        baseViewModelScope.launch {
+            _navigationHandler.emit(MainNavigationAction.NavigateToSetting)
+            whenToggleState()
+        }
+    }
 }

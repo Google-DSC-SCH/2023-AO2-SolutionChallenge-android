@@ -55,6 +55,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 R.id.homeFragment -> showBottomNav()
                 R.id.RunningFragment -> showBottomNav()
                 R.id.InventorFragment -> showBottomNav()
+                R.id.SettingFragment -> showBottomNav()
+
                 else -> hideBottomNav()
             }
         }
@@ -83,6 +85,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 //                    is HomeNavigationAction.NavigateToInit -> Unit
                     is MainNavigationAction.NavigateToRunning -> navController.navigate(R.id.RunningFragment)
                     is MainNavigationAction.NavigateToInventor -> navController.navigate(R.id.InventorFragment)
+                    is MainNavigationAction.NavigateToSetting -> navController.navigate(R.id.SettingFragment)
 //                    is HomeNavigationAction.NavigateToTodoDetail -> navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(it.todoIdx))
 //                    is HomeNavigationAction.NavigateToPaging -> navigate(HomeFragmentDirections.actionHomeFragmentToPagingFragment())
                     else -> {}
