@@ -155,10 +155,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
         } else { // 플로팅 액션 버튼 열기 - 닫혀있는 플로팅 버튼 꺼내는 애니메이션
             ObjectAnimator.ofFloat(binding.btToShare, "translationY", -360f).apply { start() }
-            ObjectAnimator.ofFloat(binding.btToShare, "translationX", +180f).apply { start() }
+            ObjectAnimator.ofFloat(binding.btToShare, "translationX", +270f).apply { start() }
 
             ObjectAnimator.ofFloat(binding.txtToShare, "translationY", -360f).apply { start() }
-            ObjectAnimator.ofFloat(binding.txtToShare, "translationX", +180f).apply { start() }
+            ObjectAnimator.ofFloat(binding.txtToShare, "translationX", +270f).apply { start() }
 
             ObjectAnimator.ofFloat(binding.btToInventory, "translationY", -120f).apply { start() }
             ObjectAnimator.ofFloat(binding.btToInventory, "translationX", +270f).apply { start() }
@@ -166,14 +166,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             ObjectAnimator.ofFloat(binding.txtToInventory, "translationY", -120f).apply { start() }
             ObjectAnimator.ofFloat(binding.txtToInventory, "translationX", +270f).apply { start() }
 
-            ObjectAnimator.ofFloat(binding.btToPaging, "translationY", -500f).apply { start() }
-            ObjectAnimator.ofFloat(binding.txtToPaging, "translationY", -500f).apply { start() }
+            ObjectAnimator.ofFloat(binding.btToPaging, "translationY", -240f).apply { start() }
+            ObjectAnimator.ofFloat(binding.txtToPaging, "translationY", -240f).apply { start() }
 
             ObjectAnimator.ofFloat(binding.btAddTodo, "translationY", -360f).apply { start() }
-            ObjectAnimator.ofFloat(binding.btAddTodo, "translationX", -180f).apply { start() }
+            ObjectAnimator.ofFloat(binding.btAddTodo, "translationX", -270f).apply { start() }
 
             ObjectAnimator.ofFloat(binding.txtAddTodo, "translationY", -360f).apply { start() }
-            ObjectAnimator.ofFloat(binding.txtAddTodo, "translationX", -180f).apply { start() }
+            ObjectAnimator.ofFloat(binding.txtAddTodo, "translationX", -270f).apply { start() }
 
             ObjectAnimator.ofFloat(binding.btDeleteTodo, "translationY", -120f).apply { start() }
             ObjectAnimator.ofFloat(binding.btDeleteTodo, "translationX", -270f).apply { start() }
