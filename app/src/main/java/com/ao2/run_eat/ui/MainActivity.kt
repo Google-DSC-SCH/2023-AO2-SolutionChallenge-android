@@ -151,7 +151,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             ObjectAnimator.ofFloat(binding.txtToInventory, "translationY", 0f).apply { start() }
             ObjectAnimator.ofFloat(binding.txtToInventory, "translationX", 0f).apply { start() }
 
-            ObjectAnimator.ofFloat(binding.btTodo, View.ROTATION, 45f, 0f).apply { start() }
+//            ObjectAnimator.ofFloat(binding.btTodo, View.ROTATION, 45f, 0f).apply { start() }
 
         } else { // 플로팅 액션 버튼 열기 - 닫혀있는 플로팅 버튼 꺼내는 애니메이션
             ObjectAnimator.ofFloat(binding.btToShare, "translationY", -360f).apply { start() }
@@ -186,30 +186,37 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     override fun onBackPressed() {
-        try {
-            if (onBackPressedDispatcher.hasEnabledCallbacks()) {
-                super.onBackPressed()
-            } else {
-                when (navController.currentDestination?.id) {
-                    R.id.homeFragment -> {
-                        if (System.currentTimeMillis() - waitTime >= 1500) {
-                            waitTime = System.currentTimeMillis()
-                            Toast.makeText(
-                                this,
-                                getString(R.string.onBackPressed_Message),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        } else {
-                            finishAffinity() // 액티비티 종료
+        if (!viewModel.toggleStateEvent.value){
+            try {
+                if (onBackPressedDispatcher.hasEnabledCallbacks()) {
+                    super.onBackPressed()
+                } else {
+                    when (navController.currentDestination?.id) {
+                        R.id.homeFragment -> {
+                            if (System.currentTimeMillis() - waitTime >= 1500) {
+                                waitTime = System.currentTimeMillis()
+                                Toast.makeText(
+                                    this,
+                                    getString(R.string.onBackPressed_Message),
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            } else {
+                                finishAffinity() // 액티비티 종료
+                            }
                         }
+                        null -> super.onBackPressed()
+                        else -> navController.navigate(NavigationGraphDirections.actionMainFragment())
                     }
-                    null -> super.onBackPressed()
-                    else -> navController.navigate(NavigationGraphDirections.actionMainFragment())
                 }
+            } catch (e: Exception) {
+                Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
             }
-        } catch (e: Exception) {
-            Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+
+
+        }else{
+            viewModel.toggleStateEvent.value = false
         }
+
     }
 
     /** DynamicLink */
