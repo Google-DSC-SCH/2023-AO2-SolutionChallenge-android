@@ -86,7 +86,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                     is MainNavigationAction.NavigateToRunning -> navController.navigate(R.id.RunningFragment)
                     is MainNavigationAction.NavigateToInventor -> navController.navigate(R.id.InventorFragment)
                     is MainNavigationAction.NavigateToSetting -> navController.navigate(R.id.SettingFragment)
-                    is MainNavigationAction.NavigateToHome -> navController.navigate(R.id.homeFragment)
+                    is MainNavigationAction.NavigateToHome -> navController.popBackStack()
 //                    is HomeNavigationAction.NavigateToPaging -> navigate(HomeFragmentDirections.actionHomeFragmentToPagingFragment())
                     else -> {}
                 }
@@ -121,7 +121,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     private fun toggleFab(state: Boolean) {
         // 플로팅 액션 버튼 닫기 - 열려있는 플로팅 버튼 집어넣는 애니메이션
         if (!state) {
-            if (navController.currentDestination!!.id == R.id.homeFragment) ObjectAnimator.ofFloat(binding.btTodo, View.ROTATION, 45f, 0f).apply { start() }
+            if (navController.currentDestination!!.id == R.id.homeFragment) ObjectAnimator.ofFloat(
+                binding.btTodo,
+                View.ROTATION,
+                45f,
+                0f
+            ).apply { start() }
 
             ObjectAnimator.ofFloat(binding.btAddTodo, "translationY", 0f).apply { start() }
             ObjectAnimator.ofFloat(binding.btAddTodo, "translationX", 0f).apply { start() }
@@ -201,7 +206,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     override fun onBackPressed() {
         if (!viewModel.toggleStateEvent.value) {
-            if (navController.currentDestination!!.id != R.id.homeFragment) ObjectAnimator.ofFloat(binding.btTodo, View.ROTATION, 45f, 0f).apply { start() }
+            if (navController.currentDestination?.id != R.id.homeFragment) ObjectAnimator.ofFloat(
+                binding.btTodo,
+                View.ROTATION,
+                45f,
+                0f
+            ).apply { start() }
 
             try {
                 if (onBackPressedDispatcher.hasEnabledCallbacks()) {
@@ -209,6 +219,18 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 } else {
                     when (navController.currentDestination?.id) {
                         R.id.homeFragment -> {
+                            if (System.currentTimeMillis() - waitTime >= 1500) {
+                                waitTime = System.currentTimeMillis()
+                                Toast.makeText(
+                                    this,
+                                    getString(R.string.onBackPressed_Message),
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            } else {
+                                finishAffinity() // 액티비티 종료
+                            }
+                        }
+                        R.id.registerFragment -> {
                             if (System.currentTimeMillis() - waitTime >= 1500) {
                                 waitTime = System.currentTimeMillis()
                                 Toast.makeText(

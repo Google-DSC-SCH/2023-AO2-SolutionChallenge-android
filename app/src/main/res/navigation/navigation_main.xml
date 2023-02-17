@@ -7,7 +7,6 @@
 
     <action
         android:id="@+id/action_main_fragment"
-        app:destination="@id/homeFragment"
         app:enterAnim="@anim/nav_default_enter_anim"
         app:exitAnim="@anim/nav_default_exit_anim"
         app:popEnterAnim="@anim/nav_default_enter_anim"
@@ -19,25 +18,36 @@
         android:id="@+id/homeFragment"
         android:name="com.ao2.run_eat.ui.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home">
+        tools:layout="@layout/fragment_home"
+        app:popUpTo="@id/navigation_graph"
+        app:popUpToInclusive="true">
 
-        <action
-            android:id="@+id/action_homeFragment_to_RunningFragment"
-            app:destination="@id/RunningFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.ao2.run_eat.ui.register.RegisterFragment"
         android:label="RegisterFragment"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"
+        app:popUpTo="@id/navigation_graph"
+        app:popUpToInclusive="true"
         tools:layout="@layout/fragment_register">
 
         <action
             android:id="@+id/action_registerFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/navigation_graph"
+            app:popUpToInclusive="true"/>
+
         <action
             android:id="@+id/action_registerFragment_to_setProfileFragment"
-            app:destination="@id/setProfileFragment" />
+            app:destination="@id/setProfileFragment"
+           />
     </fragment>
 
     <fragment
@@ -48,7 +58,12 @@
 
         <action
             android:id="@+id/action_setProfileFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/navigation_graph"
+            app:popUpToInclusive="true"/>
 
     </fragment>
 
@@ -63,7 +78,9 @@
         android:id="@+id/InventorFragment"
         android:name="com.ao2.run_eat.ui.inventory.InventoryFragment"
         android:label="InventorFragment"
-        tools:layout="@layout/fragment_inventory">
+        tools:layout="@layout/fragment_inventory"
+        app:popUpTo="@id/navigation_graph"
+        app:popUpToInclusive="true">
 
     </fragment>
 
@@ -71,7 +88,9 @@
         android:id="@+id/SettingFragment"
         android:name="com.ao2.run_eat.ui.setting.SettingFragment"
         android:label="SettingFragment"
-        tools:layout="@layout/fragment_setting">
+        tools:layout="@layout/fragment_setting"
+        app:popUpTo="@id/navigation_graph"
+        app:popUpToInclusive="true">
 
     </fragment>
 
