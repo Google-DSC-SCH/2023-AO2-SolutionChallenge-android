@@ -86,7 +86,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                     is MainNavigationAction.NavigateToRunning -> navController.navigate(R.id.RunningFragment)
                     is MainNavigationAction.NavigateToInventor -> navController.navigate(R.id.InventorFragment)
                     is MainNavigationAction.NavigateToSetting -> navController.navigate(R.id.SettingFragment)
-//                    is HomeNavigationAction.NavigateToTodoDetail -> navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(it.todoIdx))
+                    is MainNavigationAction.NavigateToHome -> navController.navigate(R.id.homeFragment)
 //                    is HomeNavigationAction.NavigateToPaging -> navigate(HomeFragmentDirections.actionHomeFragmentToPagingFragment())
                     else -> {}
                 }
@@ -121,6 +121,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     private fun toggleFab(state: Boolean) {
         // 플로팅 액션 버튼 닫기 - 열려있는 플로팅 버튼 집어넣는 애니메이션
         if (!state) {
+            if (navController.currentDestination!!.id == R.id.homeFragment) ObjectAnimator.ofFloat(binding.btTodo, View.ROTATION, 45f, 0f).apply { start() }
+
             ObjectAnimator.ofFloat(binding.btAddTodo, "translationY", 0f).apply { start() }
             ObjectAnimator.ofFloat(binding.btAddTodo, "translationX", 0f).apply { start() }
 
@@ -150,43 +152,57 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
             ObjectAnimator.ofFloat(binding.txtToInventory, "translationY", 0f).apply { start() }
             ObjectAnimator.ofFloat(binding.txtToInventory, "translationX", 0f).apply { start() }
-
-//            ObjectAnimator.ofFloat(binding.btTodo, View.ROTATION, 45f, 0f).apply { start() }
-
         } else { // 플로팅 액션 버튼 열기 - 닫혀있는 플로팅 버튼 꺼내는 애니메이션
-            ObjectAnimator.ofFloat(binding.btToShare, "translationY", -360f).apply { start() }
-            ObjectAnimator.ofFloat(binding.btToShare, "translationX", +270f).apply { start() }
 
-            ObjectAnimator.ofFloat(binding.txtToShare, "translationY", -360f).apply { start() }
-            ObjectAnimator.ofFloat(binding.txtToShare, "translationX", +270f).apply { start() }
+            if (navController.currentDestination!!.id == R.id.homeFragment) {
 
-            ObjectAnimator.ofFloat(binding.btToInventory, "translationY", -120f).apply { start() }
-            ObjectAnimator.ofFloat(binding.btToInventory, "translationX", +270f).apply { start() }
+                ObjectAnimator.ofFloat(binding.btTodo, View.ROTATION, 0f, 45f).apply { start() }
 
-            ObjectAnimator.ofFloat(binding.txtToInventory, "translationY", -120f).apply { start() }
-            ObjectAnimator.ofFloat(binding.txtToInventory, "translationX", +270f).apply { start() }
+                ObjectAnimator.ofFloat(binding.btToShare, "translationY", -360f).apply { start() }
+                ObjectAnimator.ofFloat(binding.btToShare, "translationX", +270f).apply { start() }
 
-            ObjectAnimator.ofFloat(binding.btToPaging, "translationY", -240f).apply { start() }
-            ObjectAnimator.ofFloat(binding.txtToPaging, "translationY", -240f).apply { start() }
+                ObjectAnimator.ofFloat(binding.txtToShare, "translationY", -360f).apply { start() }
+                ObjectAnimator.ofFloat(binding.txtToShare, "translationX", +270f).apply { start() }
 
-            ObjectAnimator.ofFloat(binding.btAddTodo, "translationY", -360f).apply { start() }
-            ObjectAnimator.ofFloat(binding.btAddTodo, "translationX", -270f).apply { start() }
+                ObjectAnimator.ofFloat(binding.btToInventory, "translationY", -120f)
+                    .apply { start() }
+                ObjectAnimator.ofFloat(binding.btToInventory, "translationX", +270f)
+                    .apply { start() }
 
-            ObjectAnimator.ofFloat(binding.txtAddTodo, "translationY", -360f).apply { start() }
-            ObjectAnimator.ofFloat(binding.txtAddTodo, "translationX", -270f).apply { start() }
+                ObjectAnimator.ofFloat(binding.txtToInventory, "translationY", -120f)
+                    .apply { start() }
+                ObjectAnimator.ofFloat(binding.txtToInventory, "translationX", +270f)
+                    .apply { start() }
 
-            ObjectAnimator.ofFloat(binding.btDeleteTodo, "translationY", -120f).apply { start() }
-            ObjectAnimator.ofFloat(binding.btDeleteTodo, "translationX", -270f).apply { start() }
+                ObjectAnimator.ofFloat(binding.btToPaging, "translationY", -240f).apply { start() }
+                ObjectAnimator.ofFloat(binding.txtToPaging, "translationY", -240f).apply { start() }
 
-            ObjectAnimator.ofFloat(binding.txtDeleteTodo, "translationY", -120f).apply { start() }
-            ObjectAnimator.ofFloat(binding.txtDeleteTodo, "translationX", -270f).apply { start() }
+                ObjectAnimator.ofFloat(binding.btAddTodo, "translationY", -360f).apply { start() }
+                ObjectAnimator.ofFloat(binding.btAddTodo, "translationX", -270f).apply { start() }
 
-            ObjectAnimator.ofFloat(binding.btTodo, View.ROTATION, 0f, 45f).apply { start() }
+                ObjectAnimator.ofFloat(binding.txtAddTodo, "translationY", -360f).apply { start() }
+                ObjectAnimator.ofFloat(binding.txtAddTodo, "translationX", -270f).apply { start() }
+
+                ObjectAnimator.ofFloat(binding.btDeleteTodo, "translationY", -120f)
+                    .apply { start() }
+                ObjectAnimator.ofFloat(binding.btDeleteTodo, "translationX", -270f)
+                    .apply { start() }
+
+                ObjectAnimator.ofFloat(binding.txtDeleteTodo, "translationY", -120f)
+                    .apply { start() }
+                ObjectAnimator.ofFloat(binding.txtDeleteTodo, "translationX", -270f)
+                    .apply { start() }
+            } else {
+                viewModel.onToggleHomeClicked()
+            }
+
         }
     }
 
     override fun onBackPressed() {
-        if (!viewModel.toggleStateEvent.value){
+        if (!viewModel.toggleStateEvent.value) {
+            if (navController.currentDestination!!.id != R.id.homeFragment) ObjectAnimator.ofFloat(binding.btTodo, View.ROTATION, 45f, 0f).apply { start() }
+
             try {
                 if (onBackPressedDispatcher.hasEnabledCallbacks()) {
                     super.onBackPressed()
@@ -210,13 +226,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 }
             } catch (e: Exception) {
                 Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+
             }
-
-
-        }else{
+        } else {
             viewModel.toggleStateEvent.value = false
         }
-
     }
 
     /** DynamicLink */

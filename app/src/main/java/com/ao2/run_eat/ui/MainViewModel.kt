@@ -50,4 +50,12 @@ class MainViewModel @Inject constructor() : BaseViewModel(), MainActionHandler {
             whenToggleState()
         }
     }
+
+    fun onToggleHomeClicked() {
+        baseViewModelScope.launch {
+            _navigationHandler.emit(MainNavigationAction.NavigateToHome)
+            whenToggleState()
+
+        }
+    }
 }

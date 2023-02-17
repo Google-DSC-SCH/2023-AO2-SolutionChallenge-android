@@ -4,5 +4,7 @@ sealed class MainNavigationAction {
     object NavigateToRunning: MainNavigationAction()
     object NavigateToInventor: MainNavigationAction()
     object NavigateToSetting: MainNavigationAction()
+    object NavigateToHome: MainNavigationAction()
+
 
 }
