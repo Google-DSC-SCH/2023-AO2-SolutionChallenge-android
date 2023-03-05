@@ -424,29 +424,34 @@
         <item name="android:backgroundTint">@color/purple_200</item>
     </style>
 
-    <style name="Widget.Todo.Button.Home.Add.Check" parent="Widget.AppCompat.Button">
-        <item name="android:src">@drawable/ic_add_normal</item>
-        <item name="android:backgroundTint">@color/purple_200</item>
+    <style name="Widget.Todo.Button.Home.Bag" parent="Widget.AppCompat.Button">
+        <item name="android:src">@drawable/bag_menu_icon</item>
+        <item name="android:backgroundTint">@color/white</item>
     </style>
 
-    <style name="Widget.Todo.Button.Home.Add" parent="Widget.AppCompat.Button">
-        <item name="android:src">@drawable/ic_add_normal</item>
-        <item name="android:backgroundTint">@color/purple_500</item>
+    <style name="Widget.Todo.Button.Home.Running" parent="Widget.AppCompat.Button">
+        <item name="android:src">@drawable/running_menu_icon</item>
+        <item name="android:backgroundTint">@color/white</item>
     </style>
 
-    <style name="Widget.Todo.Button.Home.Delete" parent="Widget.AppCompat.Button">
-        <item name="android:src">@drawable/ic_add_normal</item>
-        <item name="android:backgroundTint">@color/purple_500</item>
+    <style name="Widget.Todo.Button.Home.Home" parent="Widget.AppCompat.Button">
+        <item name="android:src">@drawable/home_menu_icon</item>
+        <item name="android:backgroundTint">@color/white</item>
     </style>
 
-    <style name="Widget.Todo.Button.Home.Paging" parent="Widget.AppCompat.Button">
-        <item name="android:src">@drawable/ic_add_normal</item>
-        <item name="android:backgroundTint">@color/purple_500</item>
+    <style name="Widget.Todo.Button.Home.MyPage" parent="Widget.AppCompat.Button">
+        <item name="android:src">@drawable/my_page_menu_icon</item>
+        <item name="android:backgroundTint">@color/white</item>
     </style>
 
-    <style name="Widget.Todo.Button.Paging.Up" parent="Widget.AppCompat.Button">
-        <item name="android:src">@drawable/ic_add_normal</item>
-        <item name="android:backgroundTint">@color/purple_200</item>
+    <style name="Widget.Todo.Button.Home.Share" parent="Widget.AppCompat.Button">
+        <item name="android:src">@drawable/share_menu_icon</item>
+        <item name="android:backgroundTint">@color/white</item>
+    </style>
+
+    <style name="Widget.Todo.Button.Home.Setting" parent="Widget.AppCompat.Button">
+        <item name="android:src">@drawable/setting_menu_icon</item>
+        <item name="android:backgroundTint">@color/white</item>
     </style>
 
 

@@ -34,7 +34,7 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/bt_setting"
-            style="@style/Widget.Todo.Button.Home.Delete"
+            style="@style/Widget.Todo.Button.Home.Setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="12dp"
-            android:text="설정"
+            android:text="Setting"
             android:visibility="@{vm.toggleStateEvent ? View.VISIBLE : View.GONE}"
             app:layout_constraintTop_toTopOf="@id/bt_setting"
             app:layout_constraintBottom_toBottomOf="@id/bt_setting"
@@ -61,7 +61,7 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/bt_add_todo"
-            style="@style/Widget.Todo.Button.Home.Add"
+            style="@style/Widget.Todo.Button.Home.Running"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
@@ -76,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="12dp"
-            android:text="홈"
+            android:text="Running"
             android:visibility="@{vm.toggleStateEvent ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toTopOf="@+id/bt_add_todo"
             app:layout_constraintEnd_toEndOf="@+id/bt_add_todo"
@@ -87,7 +87,7 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/bt_delete_todo"
-            style="@style/Widget.Todo.Button.Home.Delete"
+            style="@style/Widget.Todo.Button.Home.Home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
@@ -102,7 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="12dp"
-            android:text="마이페이지"
+            android:text="Home"
             android:visibility="@{vm.toggleStateEvent ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toTopOf="@+id/bt_delete_todo"
             app:layout_constraintEnd_toEndOf="@+id/bt_delete_todo"
@@ -113,7 +113,7 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/bt_to_paging"
-            style="@style/Widget.Todo.Button.Home.Paging"
+            style="@style/Widget.Todo.Button.Home.MyPage"
             onSingleClick="@{() -> vm.onToggleRunningClicked()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -129,7 +129,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="12dp"
-            android:text="달리기"
+            android:text="My page"
             android:visibility="@{vm.toggleStateEvent ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toTopOf="@+id/bt_to_paging"
             app:layout_constraintEnd_toEndOf="@+id/bt_to_paging"
@@ -138,7 +138,7 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/bt_to_share"
-            style="@style/Widget.Todo.Button.Home.Paging"
+            style="@style/Widget.Todo.Button.Home.Share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
@@ -153,7 +153,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="12dp"
-            android:text="공유"
+            android:text="Share"
             android:visibility="@{vm.toggleStateEvent ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toTopOf="@+id/bt_to_share"
             app:layout_constraintEnd_toEndOf="@+id/bt_to_share"
@@ -162,7 +162,7 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/bt_to_inventory"
-            style="@style/Widget.Todo.Button.Home.Paging"
+            style="@style/Widget.Todo.Button.Home.Bag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
@@ -183,7 +183,9 @@
             app:layout_constraintBottom_toTopOf="@+id/bt_to_inventory"
             app:layout_constraintEnd_toEndOf="@+id/bt_to_inventory"
             app:layout_constraintRight_toLeftOf="@id/bt_to_inventory"
-            app:layout_constraintStart_toStartOf="@+id/bt_to_inventory"></TextView>
+            app:layout_constraintStart_toStartOf="@+id/bt_to_inventory">
+
+        </TextView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/bt_todo"
@@ -200,13 +202,15 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/bg_toggle"
+            android:background="@drawable/home_bg"
             android:onClick="@{() -> vm.onToggleFab()}"
             android:visibility="@{vm.toggleStateEvent ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
