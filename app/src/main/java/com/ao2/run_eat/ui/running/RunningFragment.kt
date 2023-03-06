@@ -2,6 +2,7 @@ package com.ao2.run_eat.ui.running
 
 import android.Manifest
 import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
@@ -9,9 +10,18 @@ import android.os.Looper
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.ao2.run_eat.R
 import com.ao2.run_eat.base.BaseFragment
 import com.ao2.run_eat.databinding.FragmentRunningBinding
+import com.ao2.run_eat.service.Polyline
+import com.ao2.run_eat.service.TrackingService
+import com.ao2.run_eat.util.Constants.ACTION_PAUSE_SERVICE
+import com.ao2.run_eat.util.Constants.ACTION_START_OR_RESUME_SERVICE
+import com.ao2.run_eat.util.Constants.MAP_ZOOM
+import com.ao2.run_eat.util.Constants.POLYLINE_COLOR
+import com.ao2.run_eat.util.Constants.POLYLINE_WIDTH
+import com.ao2.run_eat.util.TrackingUtility
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -19,10 +29,13 @@ import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.PolylineOptions
+import com.vmadalin.easypermissions.EasyPermissions
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RunningFragment : BaseFragment<FragmentRunningBinding, RunningViewModel>(R.layout.fragment_running) ,
+    EasyPermissions.PermissionCallbacks,
     OnMapReadyCallback {
 
     private val TAG = "RunningFragment"
@@ -37,6 +50,9 @@ class RunningFragment : BaseFragment<FragmentRunningBinding, RunningViewModel>(R
     lateinit var mLastLocation: Location // 위치 값을 가지고 있는 객체
     internal lateinit var mLocationRequest: LocationRequest // 위치 정보 요청의 매개변수를 저장하는
     private val REQUEST_PERMISSION_LOCATION = 10
+
+    private var isTracking = false
+    private var pathPoints = mutableListOf<Polyline>()
 
     override fun initStartView() {
         binding.apply {
@@ -55,13 +71,94 @@ class RunningFragment : BaseFragment<FragmentRunningBinding, RunningViewModel>(R
         mMap = binding.googleMapView
         mMap.onCreate(Bundle())
         mMap.getMapAsync(this)
+        addAllPolylines()
+        subscribeToObservers()
 
+        if(TrackingUtility.hasLocationPermissions(requireContext())){
+            Log.d("Ttttt", "클릭됨")
+            sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
+        }
 
         binding.btnCurrentPosition.setOnClickListener {
             startLocationUpdates()
+
+
+
             Log.d("Ttt", "클릭됨")
         }
 
+    }
+
+    private fun subscribeToObservers() {
+        TrackingService.isTracking.observe(viewLifecycleOwner, Observer {
+            updateTracking(it)
+        })
+
+        TrackingService.pathPoints.observe(viewLifecycleOwner, Observer {
+            pathPoints = it
+            addLatestPolyline()
+            moveCameraToUser()
+        })
+    }
+
+    private fun toggleRun() {
+        if(isTracking) {
+            sendCommandToService(ACTION_PAUSE_SERVICE)
+        } else {
+            sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
+        }
+    }
+
+    private fun updateTracking(isTracking: Boolean) {
+        this.isTracking = isTracking
+        if(!isTracking) {
+//            btnToggleRun.text = "Start"
+//            btnFinishRun.visibility = View.VISIBLE
+        } else {
+//            btnToggleRun.text = "Stop"
+//            btnFinishRun.visibility = View.GONE
+        }
+    }
+
+    private fun moveCameraToUser() {
+        if(pathPoints.isNotEmpty() && pathPoints.last().isNotEmpty()) {
+            googleMap?.animateCamera(
+                CameraUpdateFactory.newLatLngZoom(
+                    pathPoints.last().last(),
+                    MAP_ZOOM
+                )
+            )
+        }
+    }
+
+    private fun addAllPolylines() {
+        for(polyline in pathPoints) {
+            val polylineOptions = PolylineOptions()
+                .color(POLYLINE_COLOR)
+                .width(POLYLINE_WIDTH)
+                .addAll(polyline)
+            googleMap?.addPolyline(polylineOptions)
+        }
+    }
+
+    private fun addLatestPolyline() {
+        if(pathPoints.isNotEmpty() && pathPoints.last().size > 1) {
+            val preLastLatLng = pathPoints.last()[pathPoints.last().size - 2]
+            val lastLatLng = pathPoints.last().last()
+            val polylineOptions = PolylineOptions()
+                .color(POLYLINE_COLOR)
+                .width(POLYLINE_WIDTH)
+                .add(preLastLatLng)
+                .add(lastLatLng)
+            googleMap?.addPolyline(polylineOptions)
+        }
+    }
+
+    private fun sendCommandToService(action: String) {
+        Intent(requireContext(), TrackingService::class.java).also { Intent ->
+            Intent.action = action
+            requireContext().startService(Intent)
+        }
     }
 
     override fun initDataBinding() {
@@ -156,6 +253,16 @@ class RunningFragment : BaseFragment<FragmentRunningBinding, RunningViewModel>(R
     override fun onDestroy() {
         super.onDestroy()
         mMap.onDestroy()
+    }
+
+    override fun onPermissionsGranted(requestCode: Int, perms: List<String>) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPermissionsDenied(requestCode: Int, perms: List<String>) {
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+//            AppSettingsDialog.Builder(this).build().show()
+        }
     }
 
 

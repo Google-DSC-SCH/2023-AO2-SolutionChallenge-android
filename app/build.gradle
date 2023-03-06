@@ -152,4 +152,10 @@ dependencies {
     // Google Maps
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
+
+    // Easy Permissions
+    implementation 'com.vmadalin:easypermissions-ktx:1.0.0'
+
+    // Timber
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 }
