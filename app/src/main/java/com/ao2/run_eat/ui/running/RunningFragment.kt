@@ -2,13 +2,22 @@ package com.ao2.run_eat.ui.running
 
 import android.Manifest
 import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.location.Location
+import android.os.Build
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.ao2.run_eat.R
@@ -35,7 +44,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RunningFragment : BaseFragment<FragmentRunningBinding, RunningViewModel>(R.layout.fragment_running) ,
-    EasyPermissions.PermissionCallbacks,
+    EasyPermissions.PermissionCallbacks, SensorEventListener,
     OnMapReadyCallback {
 
     private val TAG = "RunningFragment"
@@ -51,6 +60,12 @@ class RunningFragment : BaseFragment<FragmentRunningBinding, RunningViewModel>(R
     internal lateinit var mLocationRequest: LocationRequest // 위치 정보 요청의 매개변수를 저장하는
     private val REQUEST_PERMISSION_LOCATION = 10
 
+    lateinit var sensorManager: SensorManager
+    var stepCountSensor : Sensor? = null
+    lateinit var mContext : Context
+
+    val ALL_PERMISSION_OK = 100
+    private var step = 0
     private var isTracking = false
     private var pathPoints = mutableListOf<Polyline>()
 
@@ -85,6 +100,24 @@ class RunningFragment : BaseFragment<FragmentRunningBinding, RunningViewModel>(R
 
 
             Log.d("Ttt", "클릭됨")
+        }
+
+
+        mContext = requireContext()
+        sensorManager = mContext.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        stepCountSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
+
+        if (stepCountSensor == null){
+            Toast.makeText(mContext, "No Step Detect Sensor", Toast.LENGTH_SHORT).show()
+        }
+
+        if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED){
+            //ask for permission
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    requestPermissions(arrayOf(Manifest.permission.ACTIVITY_RECOGNITION), ALL_PERMISSION_OK)
+                }
+            }
         }
 
     }
@@ -238,11 +271,14 @@ class RunningFragment : BaseFragment<FragmentRunningBinding, RunningViewModel>(R
     override fun onResume() {
         super.onResume()
         mMap.onResume()
+        sensorManager.registerListener(this, stepCountSensor, SensorManager.SENSOR_DELAY_NORMAL)
     }
 
     override fun onPause() {
         super.onPause()
         mMap.onPause()
+        sensorManager.unregisterListener(this)
+
     }
 
     override fun onLowMemory() {
@@ -255,6 +291,25 @@ class RunningFragment : BaseFragment<FragmentRunningBinding, RunningViewModel>(R
         mMap.onDestroy()
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        when (requestCode) {
+            ALL_PERMISSION_OK -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(mContext, "승인 O", Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    Toast.makeText(mContext, "승인 X", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
     override fun onPermissionsGranted(requestCode: Int, perms: List<String>) {
         TODO("Not yet implemented")
     }
@@ -263,6 +318,19 @@ class RunningFragment : BaseFragment<FragmentRunningBinding, RunningViewModel>(R
         if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
 //            AppSettingsDialog.Builder(this).build().show()
         }
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun onSensorChanged(event: SensorEvent?) {
+        if (event?.sensor == stepCountSensor){
+            step++
+            toastMessage(step.toString())
+
+//            binding.tvStepCount.text = "Step Count : ${event?.values?.get(0)}"
+        }
+    }
+
+    override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
     }
 
 

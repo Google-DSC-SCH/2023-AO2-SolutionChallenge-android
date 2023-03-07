@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" /> <!-- 신체활동 -->
+    <uses-feature
+        android:name="android.hardware.sensor.light"
+        android:required="false" /> <!-- 해당 장치가 없어도 앱 다운로드가 가능하도록 진행하기 위해 -->
+
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="32"
